@@ -12,7 +12,7 @@ cd /home/$name/
 echo "Installing Dependencies...Please Wait"
 apt-get -qq update -y
 apt-get -qq dist-upgrade -y
-apt-get -qq install git mongodb python-requests libffi-dev build-essential python-django python python-dev python-pip python-pil python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-gridfs python-libvirt python-bottle python-pefile python-chardet tcpdump -y
+apt-get -qq install python python-pip python-dev libcap2-bin libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev tcpdump mongodb -y
 pip install --upgrade pip
 
 ##tcpdump permissions
