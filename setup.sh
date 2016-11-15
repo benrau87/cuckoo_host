@@ -51,6 +51,6 @@ python setup.py build
 python setup.py install
 
 ##Cuckoo
-cd /home/$name/Desktop
+cd /home/$name/
 git clone git://github.com/cuckoosandbox/cuckoo.git
 chown -R $name:$name cuckoo/
