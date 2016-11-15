@@ -67,7 +67,7 @@ cd ..
 touch start_server.sh
 chmod +x start_server.sh
 cd utils/
-./community.py --all --force
+python community.py --all --force
 
 echo " #!/bin/bash
        python -m SimpleHTTPServer 8181" > start_server.sh
