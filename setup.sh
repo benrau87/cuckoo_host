@@ -65,7 +65,6 @@ echo " #!/bin/bash
        python -m SimpleHTTPServer 8181" > start_server.sh
 
 echo
-echo "Starting file server in pwd at port 8181"
-python -m SimpleHTTPServer 8181
+echo "Installation complete, login as $name and open the terminal. In the cuckoo folder under ~, you can launch start_sever.sh to share agent and exe's. Report webpage is at http://localhost:8000"
 
 echo "pref("browser.startup.homepage", "http://localhost:8000" | tee -a /etc/firefox/syspref.js
