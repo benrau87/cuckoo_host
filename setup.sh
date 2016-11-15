@@ -12,7 +12,7 @@ adduser $name
 echo "Installing Dependencies...Please Wait"
 apt-get -qq update -y
 apt-get -qq dist-upgrade -y
-apt-get -qq install git mongodb libffi-dev build-essential python-django python python-dev python-pip python-pil python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-gridfs python-libvirt python-bottle python-pefile python-chardet tcpdump -y
+apt-get -qq install git mongodb python-requests libffi-dev build-essential python-django python python-dev python-pip python-pil python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-gridfs python-libvirt python-bottle python-pefile python-chardet tcpdump -y
 
 ##tcpdump permissions
 setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
