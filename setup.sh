@@ -3,11 +3,12 @@ if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit 1
 fi
-dir=$PWD
+
 echo "What would you like your Cuckoo username to be?"
 read name
 adduser $name
 cd /home/$name/
+dir=$PWD
 ##Depos add
 echo "Installing Dependencies...Please Wait"
 apt-get -qq update -y
