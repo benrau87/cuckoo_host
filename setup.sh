@@ -53,6 +53,7 @@ python setup.py install
 ##Cuckoo
 cd /home/$name/
 wget https://github.com/cuckoosandbox/cuckoo/archive/2.0-rc1.zip
+unzip 2.0-rc*
 chown -R $name:$name cuckoo/
 cd cuckoo/
 pip install -r requirements.txt
