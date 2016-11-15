@@ -55,7 +55,7 @@ python setup.py install
 cd /home/$name/
 wget https://downloads.cuckoosandbox.org/cuckoo-current.tar.gz
 tar xzvf cuckoo-current.tar.gz
-chown -R $name:$name cuckoo*/
+chown -R $name:$name /home/$name/*
 pip install -r cuckoo*/requirements.txt
 mkdir windows_python_exe/
 cd windows_python_exe/
