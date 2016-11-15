@@ -13,6 +13,7 @@ echo "Installing Dependencies...Please Wait"
 apt-get -qq update -y
 apt-get -qq dist-upgrade -y
 apt-get -qq install git mongodb python-requests libffi-dev build-essential python-django python python-dev python-pip python-pil python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-gridfs python-libvirt python-bottle python-pefile python-chardet tcpdump -y
+pip install --upgrade pip
 
 ##tcpdump permissions
 setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
@@ -52,8 +53,8 @@ python setup.py install
 
 ##Cuckoo
 cd /home/$name/
-wget https://github.com/cuckoosandbox/cuckoo/archive/2.0-rc1.zip
-unzip 2.0-rc*
+wget https://downloads.cuckoosandbox.org/cuckoo-current.tar.gz
+tar xzvf cuckoo-current.tar.gz
 chown -R $name:$name cuckoo*/
 pip install -r cuckoo*/requirements.txt
 mkdir windows_python_exe/
@@ -63,6 +64,9 @@ wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.amd64.msi
 cd ..
 touch start_server.sh
 chmod +x start_server.sh
+cd utils/
+./community.py --all --force
+
 echo " #!/bin/bash
        python -m SimpleHTTPServer 8181" > start_server.sh
 
