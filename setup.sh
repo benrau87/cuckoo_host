@@ -7,7 +7,7 @@ dir=$PWD
 echo "What would you like your Cuckoo username to be?"
 read name
 adduser $name
-
+cd /home/$name/
 ##Depos add
 echo "Installing Dependencies...Please Wait"
 apt-get -qq update -y
