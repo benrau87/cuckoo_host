@@ -1,2 +1,2 @@
 # cuckoo_host
-Host isntallatio script
+Host installation script
