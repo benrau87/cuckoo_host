@@ -55,8 +55,8 @@ python setup.py install
 ##Cuckoo
 cd /home/$name/
 usermod -a -G vboxusers $name
-wget https://downloads.cuckoosandbox.org/cuckoo-current.tar.gz
-tar xzvf cuckoo-current.tar.gz
+git clone https://github.com/cuckoosandbox/cuckoo.git
+
 chown -R $name:$name /home/$name/*
 pip install -r cuckoo*/requirements.txt
 mkdir windows_python_exe/
