@@ -54,3 +54,4 @@ python setup.py install
 cd /home/$name/
 git clone git://github.com/cuckoosandbox/cuckoo.git
 chown -R $name:$name cuckoo/
+echo "pref("browser.startup.homepage", "http://localhost:8000" | tee -a /etc/firefox/syspref.js
