@@ -55,6 +55,7 @@ cd /home/$name/
 git clone git://github.com/cuckoosandbox/cuckoo.git
 chown -R $name:$name cuckoo/
 cd cuckoo/
+pip install -r requirements.txt
 mkdir windows_python_exe/
 wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe
 wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.amd64.msi
