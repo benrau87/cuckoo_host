@@ -12,7 +12,7 @@ cd /home/$name/
 echo "Installing Dependencies...Please Wait"
 apt-get -qq update -y
 apt-get -qq dist-upgrade -y
-apt-get -qq install python python-pip python-dev libcap2-bin libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev tcpdump mongodb -y
+apt-get -qq install python python-pip python-dev libcap2-bin libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev tcpdump mongodb virtualbox -y
 pip install --upgrade pip
 
 ##tcpdump permissions
@@ -53,6 +53,7 @@ python setup.py install
 
 ##Cuckoo
 cd /home/$name/
+usermod -a -G vboxusers $name
 wget https://downloads.cuckoosandbox.org/cuckoo-current.tar.gz
 tar xzvf cuckoo-current.tar.gz
 chown -R $name:$name /home/$name/*
