@@ -54,10 +54,10 @@ python setup.py install
 cd /home/$name/
 wget https://github.com/cuckoosandbox/cuckoo/archive/2.0-rc1.zip
 unzip 2.0-rc*
-chown -R $name:$name cuckoo/
-cd cuckoo/
-pip install -r requirements.txt
+chown -R $name:$name cuckoo*/
+pip install -r cuckoo*/requirements.txt
 mkdir windows_python_exe/
+cd windows_python_exe/
 wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe
 wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.amd64.msi
 cd ..
