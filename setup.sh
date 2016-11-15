@@ -54,4 +54,14 @@ python setup.py install
 cd /home/$name/
 git clone git://github.com/cuckoosandbox/cuckoo.git
 chown -R $name:$name cuckoo/
+
+touch start_server.sh
+chmod +x start_server.sh
+echo " #!/bin/bash
+       python -m SimpleHTTPServer 8181" > start_server.sh
+
+echo
+echo "Starting file server in pwd at port 8181"
+python -m SimpleHTTPServer 8181
+
 echo "pref("browser.startup.homepage", "http://localhost:8000" | tee -a /etc/firefox/syspref.js
