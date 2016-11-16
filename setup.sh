@@ -7,6 +7,7 @@ fi
 echo "What would you like your Cuckoo username to be?"
 read name
 adduser $name
+cp *.conf /home/$name/
 cd /home/$name/
 dir=$PWD
 ##Depos add
