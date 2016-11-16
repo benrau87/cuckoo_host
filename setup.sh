@@ -76,5 +76,12 @@ echo "pref("browser.startup.homepage", "http://localhost:8000"" | tee -a /etc/fi
 echo " #!/bin/bash
        python -m SimpleHTTPServer 8181" > start_server.sh
 
+###Setup of VirtualBox forwarding rules and host only adapter
+vboxmanage hostonlyif create
+iptables -A FORWARD -o eth0 -i vboxnet0 -s 192.168.56.0/24 -m conntrack --ctstate NEW -j ACCEPT
+sudo iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+sudo iptables -A POSTROUTING -t nat -j MASQUERADE
+sudo sysctl -w net.ipv4.ip_forward=1
+
 echo
 echo "Installation complete, login as $name and open the terminal. In the cuckoo folder under ~, you can launch start_sever.sh to share agent and exe's. Report webpage is at http://localhost:8000"
