@@ -4,7 +4,7 @@ if [ "$EUID" -ne 0 ]
   exit 1
 fi
 
-echo "What would you like your Cuckoo username to be?"
+echo "\e[31m What would you like your Cuckoo username to be \e[0m?"
 read name
 adduser $name
 cp *.conf /home/$name/
