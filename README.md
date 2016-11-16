@@ -2,6 +2,7 @@
 Host installation script
 
 Usage:
+
 1) Run setup.sh on fresh Ubuntu/Debian install
 
 2) Follow prompts to create a local Cuckoo user
