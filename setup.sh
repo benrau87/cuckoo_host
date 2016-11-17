@@ -20,8 +20,9 @@ dir=$PWD
 echo "Installing Dependencies...Please Wait"
 apt-get -qq update -y
 apt-get -qq dist-upgrade -y
+apt-get -qq install wireshark tcpdump python python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev mongodb -y
 #apt-get -qq install python python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev mongodb virtualbox tcpdump wireshark -y
-apt-get install mongodb libffi-dev build-essential python-django python python-dev python-pip python-pil python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-gridfs python-libvirt python-bottle python-pefile python-chardet tcpdump wireshark virtualbox -y
+#apt-get install mongodb libffi-dev build-essential python-django python python-dev python-pip python-pil python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-gridfs python-libvirt python-bottle python-pefile python-chardet tcpdump wireshark virtualbox -y
 #apt-get -qq install python python-pip python-dev libcap2-bin libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev tcpdump mongodb virtualbox -y
 #apt-get -qq install mongodb libffi-dev build-essential python-django python python-dev python-pip python-pil python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-gridfs python-libvirt python-bottle python-pefile python-chardet virtualbox tcpdump -y
 pip install --upgrade pip
@@ -66,9 +67,9 @@ python setup.py install
 cd /home/$name/
 usermod -a -G vboxusers $name
 git clone https://github.com/cuckoosandbox/cuckoo.git
-
-chown -R $name:$name /home/$name/*
 pip install -r cuckoo*/requirements.txt
+chown -R $name:$name /home/$name/*
+
 mkdir windows_python_exe/
 cd windows_python_exe/
 wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe
