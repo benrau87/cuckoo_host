@@ -77,8 +77,8 @@ usermod -a -G vboxusers $name
 wget https://downloads.cuckoosandbox.org/2.0-rc2/cuckoo-2.0-rc2.tar.gz
 tar -xvzf cuckoo-2.0-rc2.tar.gz
 pip install -r cuckoo/requirements.txt
-cp cuckoo.conf reporting.conf virtualbox.conf cuckoo/conf/
-rm *.conf
+#cp cuckoo.conf reporting.conf virtualbox.conf cuckoo/conf/
+#rm *.conf
 mkdir windows_python_exe/
 cd windows_python_exe/
 wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe
