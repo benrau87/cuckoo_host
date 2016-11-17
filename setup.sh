@@ -76,8 +76,8 @@ wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.amd64.msi
 cd ..
 touch start_server.sh
 chmod +x start_server.sh
-cd /home/$name/cuckoo/utils/
-python community.py --all --force
+cd cuckoo/utils/
+python comm* --all --force
 
 echo "pref("browser.startup.homepage", "http://localhost:8000"" | tee -a /etc/firefox/syspref.js
 
