@@ -22,15 +22,18 @@ mkdir tools/
 cd tools/
 ##Depos add
 echo -e "${RED}Installing Dependencies...Please Wait${NC}"
+#Mongodb
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 apt-get -qq update -y
 apt-get -qq dist-upgrade -y
-apt-get -qq install wireshark tcpdump virtualbox python python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev mongodb -y
+apt-get -qq install wireshark tcpdump virtualbox python python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev -y
 #apt-get -qq install python python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev mongodb virtualbox tcpdump wireshark -y
 #apt-get install mongodb libffi-dev build-essential python-django python python-dev python-pip python-pil python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-gridfs python-libvirt python-bottle python-pefile python-chardet tcpdump wireshark virtualbox -y
 #apt-get -qq install python python-pip python-dev libcap2-bin libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev tcpdump mongodb virtualbox -y
 #apt-get -qq install mongodb libffi-dev build-essential python-django python python-dev python-pip python-pil python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-gridfs python-libvirt python-bottle python-pefile python-chardet virtualbox tcpdump -y
 pip install --upgrade pip
-
+systemctl enable mongodb.service
 ##tcpdump permissions
 setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 
