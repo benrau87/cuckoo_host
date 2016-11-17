@@ -81,6 +81,9 @@ wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.amd64.msi
 cd ..
 cd cuckoo/utils/
 python comm* --all --force
+cd ..
+wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz
+tar -xvzf v1.0.tar.gz
 
 ###Setup of VirtualBox forwarding rules and host only adapter
 vboxmanage hostonlyif create
