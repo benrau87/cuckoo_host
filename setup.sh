@@ -74,15 +74,8 @@ cd windows_python_exe/
 wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe
 wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.amd64.msi
 cd ..
-touch start_server.sh
-chmod +x start_server.sh
 cd cuckoo/utils/
 python comm* --all --force
-
-echo "pref("browser.startup.homepage", "http://localhost:8000"" | tee -a /etc/firefox/syspref.js
-
-echo " #!/bin/bash
-       python -m SimpleHTTPServer 8181" > start_server.sh
 
 ###Setup of VirtualBox forwarding rules and host only adapter
 vboxmanage hostonlyif create
