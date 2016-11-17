@@ -70,7 +70,7 @@ usermod -a -G vboxusers $name
 #git clone https://github.com/cuckoosandbox/cuckoo.git
 wget https://downloads.cuckoosandbox.org/2.0-rc2/cuckoo-2.0-rc2.tar.gz
 tar -xvzf cuckoo-2.0-rc2.tar.gz
-pip install -r cuckoo*/requirements.txt
+pip install -r cuckoo/requirements.txt
 chown -R $name:$name /home/$name/*
 
 mkdir windows_python_exe/
@@ -78,7 +78,7 @@ cd windows_python_exe/
 wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe
 wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.amd64.msi
 cd ..
-cd cuckoo*/utils/
+cd cuckoo/utils/
 python comm* --all --force
 
 ###Setup of VirtualBox forwarding rules and host only adapter
@@ -89,4 +89,4 @@ sudo iptables -A POSTROUTING -t nat -j MASQUERADE
 sudo sysctl -w net.ipv4.ip_forward=1
 
 echo
-echo "${RED}Installation complete, login as $name and open the terminal. In the cuckoo folder under ~, you can launch start_sever.sh to share agent and exe's. Report webpage is at http://localhost:8000${NC}"
+echo -e "${RED}Installation complete, login as $name and open the terminal. In the cuckoo folder under ~, you can launch start_sever.sh to share agent and exe's. Report webpage is at http://localhost:8000${NC}"
