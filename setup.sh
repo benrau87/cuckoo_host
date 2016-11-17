@@ -12,8 +12,7 @@ adduser $name
 
 #Add startup script
 chmod +x start_cuckoo.sh
-cp start_cuckoo.sh /etc/init.d/
-update-rc.d start_cuckoo.sh defaults 100
+cp start_cuckoo.sh /etc/
 
 cp *.conf /home/$name/
 cd /home/$name/
