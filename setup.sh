@@ -67,7 +67,9 @@ python setup.py install
 ##Cuckoo
 cd /home/$name/
 usermod -a -G vboxusers $name
-git clone https://github.com/cuckoosandbox/cuckoo.git
+#git clone https://github.com/cuckoosandbox/cuckoo.git
+wget https://downloads.cuckoosandbox.org/2.0-rc2/cuckoo-2.0-rc2.tar.gz
+tar -xvzf cuckoo-2.0-rc2.tar.gz
 pip install -r cuckoo*/requirements.txt
 chown -R $name:$name /home/$name/*
 
@@ -76,7 +78,7 @@ cd windows_python_exe/
 wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe
 wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.amd64.msi
 cd ..
-cd cuckoo/utils/
+cd cuckoo*/utils/
 python comm* --all --force
 
 ###Setup of VirtualBox forwarding rules and host only adapter
