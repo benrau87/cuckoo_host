@@ -9,7 +9,7 @@ Usage:
 
 3) When installation is complete you should switch accounts to the one created in the second step
 
-4) Launch virtualbox and create your first guest VM, use the host only adapter for networking. 
+4) Launch virtualbox and create your first guest VM, The default name should be Win7 and take a snapshot once the agent is installed.
 
 5) At your home folder (~) you will find various files/folders/tools, the cuckoo folder is under here as well
 
