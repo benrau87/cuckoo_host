@@ -4,8 +4,9 @@ if [ "$EUID" -ne 0 ]
   exit 1
 fi
 RED='\033[0;31m'
+YELLOW='\033[1;33m'
 NC='\033[0m'
-echo -e "${RED}What would you like your Cuckoo username to be?${NC}"
+echo -e "${YELLOW}What would you like your Cuckoo username to be?${NC}"
 read name
 adduser $name
 
@@ -18,7 +19,7 @@ cp *.conf /home/$name/
 cd /home/$name/
 dir=$PWD
 ##Depos add
-echo "Installing Dependencies...Please Wait"
+echo -e "${RED}Installing Dependencies...Please Wait${NC}"
 apt-get -qq update -y
 apt-get -qq dist-upgrade -y
 apt-get -qq install wireshark tcpdump python python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev mongodb -y
@@ -89,4 +90,4 @@ sudo iptables -A POSTROUTING -t nat -j MASQUERADE
 sudo sysctl -w net.ipv4.ip_forward=1
 
 echo
-echo -e "${RED}Installation complete, login as $name and open the terminal. In the cuckoo folder under ~, you can launch start_sever.sh to share agent and exe's. Report webpage is at http://localhost:8000${NC}"
+echo -e "${YELLOW}Installation complete, login as $name and open the terminal. In the cuckoo folder under ~, you can launch start_sever.sh to share agent and exe's. Report webpage is at http://localhost:8000${NC}"
