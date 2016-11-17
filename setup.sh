@@ -3,8 +3,8 @@ if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit 1
 fi
-
-echo "\e[31m What would you like your Cuckoo username to be \e[0m?"
+RED='\033[0;31m'
+echo "${RED} What would you like your Cuckoo username to be?"
 read name
 adduser $name
 
