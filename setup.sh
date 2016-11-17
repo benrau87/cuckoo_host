@@ -18,6 +18,8 @@ cp start.conf /etc/init/
 cp *.conf /home/$name/
 cd /home/$name/
 dir=$PWD
+mkdir tools/
+cd tools/
 ##Depos add
 echo -e "${RED}Installing Dependencies...Please Wait${NC}"
 apt-get -qq update -y
@@ -66,14 +68,14 @@ python setup.py build
 python setup.py install
 
 ##Cuckoo
-cd /home/$name/
+cd $dir
 usermod -a -G vboxusers $name
 #git clone https://github.com/cuckoosandbox/cuckoo.git
 wget https://downloads.cuckoosandbox.org/2.0-rc2/cuckoo-2.0-rc2.tar.gz
 tar -xvzf cuckoo-2.0-rc2.tar.gz
 pip install -r cuckoo/requirements.txt
-chown -R $name:$name /home/$name/*
-
+cp cuckoo.conf reporting.conf virtualbox.conf cuckoo/conf/
+rm *.conf
 mkdir windows_python_exe/
 cd windows_python_exe/
 wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe
@@ -81,10 +83,10 @@ wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.amd64.msi
 cd ..
 cd cuckoo/utils/
 python comm* --all --force
-cd ..
+cd $dir/tools/
 wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz
 tar -xvzf v1.0.tar.gz
-
+chown -R $name:$name /home/$name/*
 ###Setup of VirtualBox forwarding rules and host only adapter
 vboxmanage hostonlyif create
 iptables -A FORWARD -o eth0 -i vboxnet0 -s 192.168.56.0/24 -m conntrack --ctstate NEW -j ACCEPT
