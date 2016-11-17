@@ -4,7 +4,8 @@ if [ "$EUID" -ne 0 ]
   exit 1
 fi
 RED='\033[0;31m'
-echo -e "${RED}What would you like your Cuckoo username to be?"
+NC='\033[0m'
+echo -e "${RED}What would you like your Cuckoo username to be?${NC}"
 read name
 adduser $name
 
