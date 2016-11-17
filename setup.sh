@@ -23,7 +23,7 @@ cd tools/
 ##Depos add
 echo -e "${RED}Installing Dependencies...Please Wait${NC}"
 #Mongodb
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+apt-key adv --keyserver keyserver.ubuntu.com --recv EA312927
 echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 apt-get -qq update -y
 apt-get -qq dist-upgrade -y
