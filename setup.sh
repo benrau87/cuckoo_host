@@ -87,6 +87,7 @@ cd ..
 cd cuckoo/utils/
 python comm* --all --force
 cd $dir/tools/
+git clone https://github.com/jpsenior/threataggregator.git
 wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz
 tar -xvzf v1.0.tar.gz
 chown -R $name:$name /home/$name/*
