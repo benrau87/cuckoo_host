@@ -27,7 +27,7 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv EA312927
 echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 apt-get -qq update -y
 apt-get -qq dist-upgrade -y
-apt-get -qq install wireshark tcpdump virtualbox python python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev -y
+apt-get -qq install mongodb wireshark tcpdump virtualbox python python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev -y
 #apt-get -qq install python python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev mongodb virtualbox tcpdump wireshark -y
 #apt-get install mongodb libffi-dev build-essential python-django python python-dev python-pip python-pil python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-gridfs python-libvirt python-bottle python-pefile python-chardet tcpdump wireshark virtualbox -y
 #apt-get -qq install python python-pip python-dev libcap2-bin libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev tcpdump mongodb virtualbox -y
