@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VBoxManage hostonlyif create
+vboxmanage hostonlyif create
 VBoxManage startvm --type headless Win7
 iptables -A FORWARD -o eth0 -i vboxnet0 -s 192.168.56.0/24 -m conntrack --ctstate NEW -j ACCEPT
 iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
