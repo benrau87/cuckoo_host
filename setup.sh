@@ -25,6 +25,12 @@ echo -e "${RED}Installing Dependencies...Please Wait${NC}"
 #Mongodb
 apt-key adv --keyserver keyserver.ubuntu.com --recv EA312927
 echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+echo "Waiting for dpkg process to free up..."
+while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
+   sleep 1
+done
+
 apt-get -qq update -y
 apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump virtualbox python python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev -y
 #apt-get -qq install python python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev mongodb virtualbox tcpdump wireshark -y
