@@ -1,0 +1,14 @@
+Resolve networking issues
+Configuration files
+Create launchers or add auto-start for VMs
+Create shortcut(s) to start and connect to Cuckoo and Webpage
+
+Launcher/autostart for VolUtility
+pip install requirments for VolU
+configuration modifications
+
+?VMCloak?
+
+Future Projects
+  Incorporate into FARK and Elasticsearch
+  Add VMs for OSX, Linux (Redhat?), Android
