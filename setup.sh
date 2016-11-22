@@ -115,6 +115,6 @@ read -p "Do you want to iptable changes persistent? Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 apt-get -qq install iptables-persistent -y
-
+fi
 echo
 echo -e "${YELLOW}Installation complete, login as $name and open the terminal. In the cuckoo folder under ~, you can launch start_sever.sh to share agent and exe's. Report webpage is at http://localhost:8000${NC}"
