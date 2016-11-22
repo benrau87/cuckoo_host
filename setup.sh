@@ -118,4 +118,5 @@ then
 apt-get -qq install iptables-persistent -y
 fi
 echo
-echo -e "${YELLOW}Installation complete, login as $name and open the terminal. In the cuckoo folder under ~, you can launch start_sever.sh to share agent and exe's. Report webpage is at http://localhost:8000${NC}"
+echo -e "${YELLOW}Installation complete, login as $name and open the terminal. In $name home folder you will find the cuckoo client. To get started as fast as possible you will need to create a virtualbox vm and name it ${RED}Win7 Clone${NC}. Take a snapshot after it has been created and is running the agent and python 27. You can then launch cuckoo_start.sh and navigate to $HOSTNAME:8000${NC}"
+
