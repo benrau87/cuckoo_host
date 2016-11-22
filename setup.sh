@@ -100,9 +100,10 @@ tar -xvzf v1.0.tar.gz
 
 chown -R $name:$name /home/$name/*
 #Create mongo database and make cuckoo user owner
-mkdir /tmp/data
-mongod --dbpath /tmp/data &
-chown -R $name:$name /tmp/data/*
+mkdir /data
+mkdir /data/db
+
+chown -R $name:$name /data/*
 ###Setup of VirtualBox forwarding rules and host only adapter
 vboxmanage hostonlyif create
 iptables -A FORWARD -o eth0 -i vboxnet0 -s 192.168.56.0/24 -m conntrack --ctstate NEW -j ACCEPT
