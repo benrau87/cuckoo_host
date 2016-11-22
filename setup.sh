@@ -97,7 +97,7 @@ cd $dir/tools/
 git clone https://github.com/jpsenior/threataggregator.git
 wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz
 tar -xvzf v1.0.tar.gz
-git clone https://github.com/ytisf/theZoo.git
+#git clone https://github.com/ytisf/theZoo.git
 chown -R $name:$name /home/$name/*
 ###Setup of VirtualBox forwarding rules and host only adapter
 vboxmanage hostonlyif create
