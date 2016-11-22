@@ -107,7 +107,7 @@ sudo iptables -A POSTROUTING -t nat -j MASQUERADE
 sudo sysctl -w net.ipv4.ip_forward=1
 
 echo
-read -p -e "${YELLOW}Do you want to install SOF-ELK dashboards and configurations? Y/N${NC}" -n 1 -r
+read -p "Do you want to install SOF-ELK dashboards and configurations? Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 apt-get -qq install iptables-persistent -y
