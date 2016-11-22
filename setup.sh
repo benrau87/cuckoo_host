@@ -97,8 +97,12 @@ cd $dir/tools/
 git clone https://github.com/jpsenior/threataggregator.git
 wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz
 tar -xvzf v1.0.tar.gz
-#git clone https://github.com/ytisf/theZoo.git
+
 chown -R $name:$name /home/$name/*
+#Create mongo database and make cuckoo user owner
+mkdir /tmp/data
+mongod --dbpath /tmp/data
+chown -R $name:$name /tmp/data/*
 ###Setup of VirtualBox forwarding rules and host only adapter
 vboxmanage hostonlyif create
 iptables -A FORWARD -o eth0 -i vboxnet0 -s 192.168.56.0/24 -m conntrack --ctstate NEW -j ACCEPT
@@ -107,7 +111,7 @@ sudo iptables -A POSTROUTING -t nat -j MASQUERADE
 sudo sysctl -w net.ipv4.ip_forward=1
 
 echo
-read -p "Do you want to install SOF-ELK dashboards and configurations? Y/N" -n 1 -r
+read -p "Do you want to iptable changes persistent? Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 apt-get -qq install iptables-persistent -y
