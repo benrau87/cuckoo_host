@@ -8,6 +8,7 @@ pip install requirments for VolU
 configuration modifications
 
 ?VMCloak?
+?Thug?
 
 Future Projects
   Incorporate into FARK and Elasticsearch
