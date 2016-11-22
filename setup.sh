@@ -12,8 +12,8 @@ adduser $name
 
 #Add startup script
 chmod +x start_cuckoo.sh
-cp start_cuckoo.sh /etc/
-cp start.conf /etc/init/
+#cp start_cuckoo.sh /etc/
+#cp start.conf /etc/init/
 
 cp *.conf /home/$name/
 cd /home/$name/
@@ -104,6 +104,12 @@ iptables -A FORWARD -o eth0 -i vboxnet0 -s 192.168.56.0/24 -m conntrack --ctstat
 sudo iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 sudo iptables -A POSTROUTING -t nat -j MASQUERADE
 sudo sysctl -w net.ipv4.ip_forward=1
+
+echo
+read -p -e "${YELLOW}Do you want to install SOF-ELK dashboards and configurations? Y/N${NC}" -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+apt-get -qq install iptables-persistent -y
 
 echo
 echo -e "${YELLOW}Installation complete, login as $name and open the terminal. In the cuckoo folder under ~, you can launch start_sever.sh to share agent and exe's. Report webpage is at http://localhost:8000${NC}"
