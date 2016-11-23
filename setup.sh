@@ -115,6 +115,11 @@ sudo iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 sudo iptables -A POSTROUTING -t nat -j MASQUERADE
 sudo sysctl -w net.ipv4.ip_forward=1
 
+echo "Waiting for dpkg process to free up..."
+while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
+   sleep 1
+done
+
 echo
 read -p "Do you want to iptable changes persistent? Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
@@ -122,5 +127,5 @@ then
 apt-get -qq install iptables-persistent -y
 fi
 echo
-echo -e "${YELLOW}Installation complete, login as $name and open the terminal. In $name home folder you will find the cuckoo client. To get started as fast as possible you will need to create a virtualbox vm and name it ${RED}Win7 Clone${NC}. Take a snapshot after it has been created and is running the agent and python 27. You can then launch cuckoo_start.sh and navigate to $HOSTNAME:8000${NC}"
+echo -e "${YELLOW}Installation complete, login as $name and open the terminal. In $name home folder you will find the cuckoo client. To get started as fast as possible you will need to create a virtualbox vm and name it ${RED}Win7 Clone${NC}.${YELLOW} Take a snapshot after it has been created and is running the agent and python 27. You can then launch cuckoo_start.sh and navigate to $HOSTNAME:8000${NC}"
 
