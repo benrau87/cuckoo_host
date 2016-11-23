@@ -16,6 +16,7 @@ chmod +x start_cuckoo.sh
 #cp start.conf /etc/init/
 
 cp *.conf /home/$name/
+cp mongodb.service /etc/systemd/system/
 cp start_cuckoo.sh /home/$home/cuckoo/
 cd /home/$name/
 dir=$PWD
@@ -40,6 +41,9 @@ apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump virtualbox python pytho
 #apt-get -qq install mongodb libffi-dev build-essential python-django python python-dev python-pip python-pil python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-gridfs python-libvirt python-bottle python-pefile python-chardet virtualbox tcpdump -y
 apt-get -qq dist-upgrade -y
 pip install --upgrade pip
+systemctl start mongodb
+sleep 10
+systemctl enable mongodb
 #systemctl enable mongodb.service
 ##tcpdump permissions
 setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
