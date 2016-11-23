@@ -5,7 +5,7 @@ if [[ $ON == 1 ]]
 then
   echo "Host only interface is up"
 else 
-  vboxmange hostonlyif create
+  vboxmanage hostonlyif create
 fi
 
 VBoxManage startvm --type headless 'Win7 Clone'
