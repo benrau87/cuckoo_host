@@ -34,7 +34,7 @@ while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
 done
 
 apt-get -qq update -y
-apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump virtualbox python python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev -y
+apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump virtualbox python python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libcap2-bin -y
 #apt-get -qq install python python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev mongodb virtualbox tcpdump wireshark -y
 #apt-get install mongodb libffi-dev build-essential python-django python python-dev python-pip python-pil python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-gridfs python-libvirt python-bottle python-pefile python-chardet tcpdump wireshark virtualbox -y
 #apt-get -qq install python python-pip python-dev libcap2-bin libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev tcpdump mongodb virtualbox -y
@@ -85,6 +85,7 @@ python setup.py install
 cd $dir
 usermod -a -G vboxusers $name
 #git clone https://github.com/cuckoosandbox/cuckoo.git
+#git clone https://github.com/spender-sandbox/cuckoo-modified.git
 wget https://downloads.cuckoosandbox.org/2.0-rc2/cuckoo-2.0-rc2.tar.gz
 tar -xvzf cuckoo-2.0-rc2.tar.gz
 pip install -r cuckoo/requirements.txt
