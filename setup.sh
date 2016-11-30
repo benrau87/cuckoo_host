@@ -41,6 +41,7 @@ apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump virtualbox python pytho
 #apt-get -qq install mongodb libffi-dev build-essential python-django python python-dev python-pip python-pil python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-gridfs python-libvirt python-bottle python-pefile python-chardet virtualbox tcpdump -y
 apt-get -qq dist-upgrade -y
 pip install --upgrade pip
+usermod -a -G vboxusers $name
 systemctl start mongodb
 sleep 10
 systemctl enable mongodb
@@ -55,7 +56,8 @@ tar -zxf yara-3.4.0.tar.gz
 cd yara-3.4.0
 ./bootstrap.sh
 ./configure --with-crypto --enable-cuckoo --enable-magic
-make && make install
+make 
+make install
 cd yara-python
 python setup.py build
 python setup.py install
@@ -66,7 +68,9 @@ wget http://sourceforge.net/projects/ssdeep/files/ssdeep-2.13/ssdeep-2.13.tar.gz
 tar -zxf ssdeep-2.13.tar.gz
 cd ssdeep-2.13
 ./configure
-make && make install
+make 
+make install
+apt-get -qq install python-pip -y
 pip install pydeep
 
 ##Volatility
@@ -83,7 +87,6 @@ python setup.py install
 
 ##Cuckoo
 cd $dir
-usermod -a -G vboxusers $name
 #git clone https://github.com/cuckoosandbox/cuckoo.git
 git clone https://github.com/spender-sandbox/cuckoo-modified.git
 wget https://downloads.cuckoosandbox.org/2.0-rc2/cuckoo-2.0-rc2.tar.gz
