@@ -10,6 +10,7 @@ fi
 
 VBoxManage startvm --type headless 'Win7 Clone'
 cd cuckoo/web/
+./manage.py migrate
 ./manage.py runserver 0.0.0.0:8000 &
 cd ..
 ./cuckoo.py
