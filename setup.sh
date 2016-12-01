@@ -107,6 +107,11 @@ git clone https://github.com/jpsenior/threataggregator.git
 wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz
 git clone https://github.com/jbremer/vmcloak.git
 tar -xvzf v1.0.tar.gz
+cd $dir
+cd cuckoo-modified/
+pip install -r requirements.txt
+cd utils/
+./community --force --all
 
 chown -R $name:$name /home/$name/*
 #Create mongo database and make cuckoo user owner
