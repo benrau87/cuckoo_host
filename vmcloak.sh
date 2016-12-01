@@ -1,4 +1,5 @@
 #!/bin/bash
+apt-get install mkisofs genisoimage -y
 sudo mkdir -p ~/Desktop/windows_ISOs
 ##VMCloak
 echo
