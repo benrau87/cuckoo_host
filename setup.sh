@@ -107,19 +107,19 @@ git clone https://github.com/jpsenior/threataggregator.git
 wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz
 git clone https://github.com/jbremer/vmcloak.git
 tar -xvzf v1.0.tar.gz
-cd $dir
-cd cuckoo-modified/
+
+cd $dir/cuckoo-modified/
 pip install -r requirements.txt
 cd utils/
-./community --force --all
+python community.py --force --all
 
 chown -R $name:$name /home/$name/*
 #Create mongo database and make cuckoo user owner
-cd $dir/
-mkdir /data
-mkdir /data/db
+#cd $dir/
+#mkdir /data
+#mkdir /data/db
 
-chown -R $name:$name /data/*
+#chown -R $name:$name /data/*
 ###Setup of VirtualBox forwarding rules and host only adapter
 vboxmanage hostonlyif create
 iptables -A FORWARD -o eth0 -i vboxnet0 -s 192.168.56.0/24 -m conntrack --ctstate NEW -j ACCEPT
