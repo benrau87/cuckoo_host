@@ -19,7 +19,10 @@ then
 pip install vmcloak --upgrade
 mount -o loop,ro  --source /mnt/windows_ISOs/*.iso --target /mnt/windows_ISOs/
 vmcloak-vboxnet0
+echo -e "${YELLOW}###################################${NC}"
 echo -e "${YELLOW}This process will take some time, you should get a sandwich, or watch the install if you'd like...${NC}"
+echo
+sleep 5
 vmcloak init --vm-visible --win7x86 --iso-mount /mnt/windows_ISOs/ seven0
 vmcloak install seven0 adobe9 wic pillow dotnet40 java7
 fi
