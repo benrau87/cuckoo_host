@@ -31,9 +31,11 @@ echo
 read -p "Would you like to install Office 2007? Y/N" -n 1 -r
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
-  echo "${YELLOW}What is the path to the iso?${NC}"
+  echo
+  echo -e "${YELLOW}What is the path to the iso?${NC}"
   read path
-  echo "${YELLOW}What is the license key?${NC}"
+  echo
+  echo -e "${YELLOW}What is the license key?${NC}"
   read key
   vmcloak install seven0 office2007 \
     office2007.isopath=$path \
