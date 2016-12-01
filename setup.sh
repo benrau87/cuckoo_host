@@ -63,7 +63,7 @@ python setup.py build
 python setup.py install
 
 ##Pydeep
-cd $dir
+cd $dir/tools/
 wget http://sourceforge.net/projects/ssdeep/files/ssdeep-2.13/ssdeep-2.13.tar.gz/download -O ssdeep-2.13.tar.gz
 tar -zxf ssdeep-2.13.tar.gz
 cd ssdeep-2.13
@@ -74,7 +74,7 @@ apt-get -qq install python-pip -y
 pip install pydeep
 
 ##Volatility
-cd $dir
+cd $dir/tools/
 pip install openpyxl
 pip install ujson
 pip install pycrypto
@@ -115,6 +115,7 @@ cd utils/
 
 chown -R $name:$name /home/$name/*
 #Create mongo database and make cuckoo user owner
+cd $dir/
 mkdir /data
 mkdir /data/db
 
