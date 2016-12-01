@@ -19,10 +19,9 @@ then
 pip install vmcloak --upgrade
 mount -o loop,ro  --source /mnt/windows_ISOs/*.iso --target /mnt/windows_ISOs/
 vmcloak-vboxnet0
-echo -e "${YELLOW}This process will take some time, you should get a sandwich...${NC}"
-vmcloak init --vm-visible --win7x86 --iso-mount /mnt/windows_ISOs/ seven0
-vmcloak install seven0 adobe9 wic pillow dotnet40 java7
-
+echo -e "${YELLOW}This process will take some time, you should get a sandwich, or watch the install if you'd like...${NC}"
+vmcloak init --vm-visible --win7x86 --hostonly-gateway 192.168.56.1 --hostonly-mask 255.255.255.0 --host-ip 192.168.56.1 --iso-mount /mnt/windows_ISOs/ cuckoo1
+vmcloak install cuckoo1 adobe9 wic pillow dotnet40 java7
 echo
 read -p "Would you like to install Office 2007? Y/N" -n 1 -r
 
