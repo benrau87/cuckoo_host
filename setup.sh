@@ -16,7 +16,7 @@ chmod +x start_cuckoo.sh
 #cp start.conf /etc/init/
 
 cp *.conf /home/$name/
-#cp mongodb.service /etc/systemd/system/
+cp mongodb.service /etc/systemd/system/
 cp start_cuckoo.sh /home/$home/cuckoo/
 cd /home/$name/
 dir=$PWD
