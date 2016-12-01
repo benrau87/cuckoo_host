@@ -34,6 +34,9 @@ read -p "Would you like to install Office 2007? Y/N" -n 1 -r
     office2007.isopath=$path \
     office2007.serialkey=$key
   fi
-  
-vmcloak snapshot seven0 cuckoo1 192.168.56.101
+vmcloak snapshot cuckoo1 cuckoo1 192.168.56.101
+echo "S{YELLOW}What is your cuckoo user account name?${NC}"
+read user
+chown -R $user:$user ~/.vmcloak
+
 fi
