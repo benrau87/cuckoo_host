@@ -8,7 +8,7 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 pip install vmcloak --upgrade
-mount -o loop,ro  /mnt/windows_ISOs/*.iso
+mount -o loop,ro  --source /mnt/windows_ISOs/*.iso --target /mnt/windows_ISOs/
 vmcloak-vboxnet0
 vmcloak init --vm-visible --win7x86 --iso-mount /mnt/windows_ISOs/ seven0
 
