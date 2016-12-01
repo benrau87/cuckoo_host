@@ -22,6 +22,8 @@ vmcloak-vboxnet0
 echo -e "${YELLOW}This process will take some time, you should get a sandwich, or watch the install if you'd like...${NC}"
 vmcloak init --vm-visible --win7x86 --hostonly-gateway 192.168.56.1 --hostonly-mask 255.255.255.0 --hostonly-ip 192.168.56.101 --host-ip 192.168.56.1 --iso-mount /mnt/windows_ISOs/ cuckoo1
 vmcloak install cuckoo1 adobe9 wic pillow dotnet40 java7
+fi
+
 echo
 read -p "Would you like to install Office 2007? Y/N" -n 1 -r
 
@@ -34,9 +36,10 @@ read -p "Would you like to install Office 2007? Y/N" -n 1 -r
     office2007.isopath=$path \
     office2007.serialkey=$key
   fi
+  
 vmcloak snapshot cuckoo1 cuckoo1 192.168.56.101
 echo "S{YELLOW}What is your cuckoo user account name?${NC}"
 read user
 chown -R $user:$user ~/.vmcloak
 
-fi
+
