@@ -3,7 +3,7 @@ apt-get install mkisofs genisoimage -y
 sudo mkdir -p /mnt/windows_ISOs
 ##VMCloak
 echo
-read -p "Please place your Windows ISO in the folder on your deskotp and enter Y to continue" -n 1 -r
+read -p "Please place your Windows ISO in the folder under /mnt/windows_ISOs and enter Y to continue" -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
