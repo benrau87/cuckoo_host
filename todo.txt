@@ -1,7 +1,7 @@
 
 Create autostart to start Cuckoo and Webpage at boot
+Move cuckoo-modified and VolUtility to /etc/ and create launchers for it
 
-Launcher/autostart for VolUtility
 
 configuration modifications
 
