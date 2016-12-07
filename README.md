@@ -7,20 +7,14 @@ Usage:
 
 2) Follow prompts to create a local Cuckoo user
 
-3) When installation is complete you should switch accounts to the one created in the second step
+3) If you have a locally available Windows ISO, you can create the VM at the end of the script. Or anytime afterwards with the vmcloak.sh script provided at the home directory of the user you created in step 2.
 
-4) Launch virtualbox and create your first guest VM, The default name should be Win7 and take a snapshot once the agent is installed.
+4) When installation is complete you should switch accounts to the one created in step 2.
 
-5) At your home folder (~) you will find various files/folders/tools, the cuckoo folder is under here as well
+5) Launch virtualbox and import the VMs at ~/.vmcloak if created them in step 3 OR you can create your own. The required files for the host are stored at ~/windows_python_exe/
 
-6) The virtaulbox.conf and cuckoo.conf files found at your home folder will need to be modified to include the virtual machine name that you created, snapshot name, along with the host information. Replace the .conf files under the cuckoo folder with all the modified/unmodified .conf files found at your home directory.
+6) Before taking the running snapshot make sure that the python agent is running and your IPv4 settings are: 192.168.56.2 (address) 192.168.56.1 (gateway) 255.255.255.0 (broadcast) 8.8.8.8 (DNS server or whatever you prefer)
 
-7) Back at ~ you will find a script that is called start_server.sh, this will launch a simple http file server for you to download the agent onto the VMs. Record the host IP address.
+7) The included conf files, which are stored under /etc/cuckoo-modified/conf/ are good for one Windows 7 32-bit VM with a name of cuckoo1 and a running snapshot of vmcloak. If you need to modify them for your needs please read the offical Cuckoo Sandbox documentation.
 
-8) On the VM guest just navigate using the guest's browser to http://<host ip>:8181. For Windows machines you will need to install Python from the windows_python_exe folder as well as the agent in the cuckoo folder
-
-9) Start the agent on the guest machine(s)
-
-10) Back on the host start the cuckoo.py script under ~ with 'python cuckoo.py', also start the web interface under /cuckoo/web with 'python manage.py runserver 0.0.0.0:8000'
-
-11) Navigate to http://localhost:8000 
+8) Run the start_cuckoo.sh script and navigate to http://localhost:8000 
