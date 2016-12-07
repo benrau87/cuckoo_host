@@ -45,7 +45,7 @@ then
     office2007.isopath=$path \
     office2007.serialkey=$key
 fi
-
+echo
 echo -e "${YELLOW}Creating snapshot of VM${NC}"  
 vmcloak snapshot seven0 cuckoo1 192.168.56.2
 
@@ -53,6 +53,7 @@ vmcloak snapshot seven0 cuckoo1 192.168.56.2
 
 chown -R $user:$user ~/.vmcloak
 mv ~/.vmcloak /home/$user/
+echo
 echo -e "${YELLOW}The VM is located under $user home folder under .vmcloak, you will need to register this with Virtualbox.${NC}"  
 
 
