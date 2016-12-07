@@ -39,7 +39,7 @@ apt-get -qq update -y
 apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump virtualbox python python-pip python-dev libvirt-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libcap2-bin python-dnspython -y
 apt-get -qq dist-upgrade -y
 pip install --upgrade pip
-
+pip install -r $gitdir/requirements.txt
 ##Add user to vbox and enable mongodb
 usermod -a -G vboxusers $name
 systemctl start mongodb
