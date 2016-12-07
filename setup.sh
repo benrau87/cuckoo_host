@@ -6,18 +6,19 @@ fi
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
+gitdir=$PWD
 echo -e "${YELLOW}What would you like your Cuckoo username to be?${NC}"
 read name
 adduser $name
 
-#Add startup script
+#Add startup script to cuckoo users home folder
 chmod +x start_cuckoo.sh
-#cp start_cuckoo.sh /etc/
-#cp start.conf /etc/init/
+chown $name:$name start_cuckoo.sh
+mv start_cuckoo.sh /home/$name/
 
-cp *.conf /home/$name/
+#cp *.conf /home/$name/
 cp mongodb.service /etc/systemd/system/
-cp start_cuckoo.sh /home/$home/cuckoo/
+#cp start_cuckoo.sh /home/$home/cuckoo/
 cd /home/$name/
 dir=$PWD
 mkdir tools/
@@ -85,35 +86,36 @@ cd volatility
 python setup.py build
 python setup.py install
 
-##Cuckoo
-cd $dir
-#git clone https://github.com/cuckoosandbox/cuckoo.git
-git clone https://github.com/spender-sandbox/cuckoo-modified.git
-wget https://downloads.cuckoosandbox.org/2.0-rc2/cuckoo-2.0-rc2.tar.gz
-tar -xvzf cuckoo-2.0-rc2.tar.gz
-pip install -r cuckoo/requirements.txt
-pip install django-ratelimit
-cp cuckoo.conf reporting.conf virtualbox.conf cuckoo/conf/
-#rm *.conf
-mkdir windows_python_exe/
-cd windows_python_exe/
-wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe
-wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi
-cd ..
-cd cuckoo/utils/
-python comm* --all --force
+##Other tools
 cd $dir/tools/
 git clone https://github.com/jpsenior/threataggregator.git
 wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz
 git clone https://github.com/jbremer/vmcloak.git
 tar -xvzf v1.0.tar.gz
 
-cd $dir/cuckoo-modified/
-pip install -r requirements.txt
-cd utils/
-python community.py --force --all
+##Cuckoo
+#cd $dir
+cd /etc/
+#git clone https://github.com/cuckoosandbox/cuckoo.git
+git clone https://github.com/spender-sandbox/cuckoo-modified.git
+#wget https://downloads.cuckoosandbox.org/2.0-rc2/cuckoo-2.0-rc2.tar.gz
+#tar -xvzf cuckoo-2.0-rc2.tar.gz
+pip install -r cuckoo-modified/requirements.txt
+pip install django-ratelimit
+cd cuckoo-modified/utils/
+python comm* --all --force
+#Copy over conf files
+cd $gitdir/
+cp cuckoo.conf reporting.conf virtualbox.conf /etc/cuckoo-modified/conf/
+#rm *.conf
+cd $dir
+mkdir windows_python_exe/
+cd windows_python_exe/
+wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe
+wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi
 
 chown -R $name:$name /home/$name/*
+chown -R $name:$name /etc/cuckoo-modified/*
 #Create mongo database and make cuckoo user owner
 #cd $dir/
 #mkdir /data
