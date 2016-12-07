@@ -28,7 +28,7 @@ vmcloak install seven0 adobe9 wic pillow dotnet40 java7
 fi
 
 echo
-read -p "Would you like to install Office 2007? Y/N" -n 1 -r
+read -p "Would you like to install Office 2007? This WILL require an ISO and key. Y/N" -n 1 -r
   if [[ $REPLY =~ ^[Yy]$ ]]
   then
   echo
@@ -42,7 +42,7 @@ read -p "Would you like to install Office 2007? Y/N" -n 1 -r
     office2007.serialkey=$key
   fi
   
-vmcloak snapshot seven0 cuckoo1 192.168.56.101
+vmcloak snapshot seven0 cuckoo1 192.168.56.2
 echo -e "${YELLOW}What is your cuckoo user account name?${NC}"
 read user
 chown -R $user:$user ~/.vmcloak
