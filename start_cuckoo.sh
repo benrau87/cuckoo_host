@@ -9,7 +9,7 @@ VBoxManage hostonlyif create
 VBoxManage hostonlyif ipconfig vboxnet0 --ip 192.168.56.1
 fi
 #VBoxManage startvm --type headless 'Win7 Clone'
-cd cuckoo/web/
+cd /etc/cuckoo-modified/web/
 ./manage.py migrate
 ./manage.py runserver 0.0.0.0:8000 &
 cd ..
