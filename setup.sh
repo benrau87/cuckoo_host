@@ -118,6 +118,7 @@ wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi
 
 chown -R $name:$name /home/$name/*
 chown -R $name:$name /etc/cuckoo-modified/*
+chmod -R 777 /etc/cuckoo-modified/
 #Create mongo database and make cuckoo user owner
 #cd $dir/
 #mkdir /data
