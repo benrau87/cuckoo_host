@@ -109,6 +109,7 @@ cp vmcloak.sh $dir/
 ##Add windows python and PIL installers for VMs
 cd $dir
 mkdir windows_python_exe/
+cp /etc/cuckoo-modified/agent/agent.py $dir/windows_python_exe/
 cd windows_python_exe/
 wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe
 wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi
