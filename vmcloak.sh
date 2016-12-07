@@ -9,7 +9,7 @@ NC='\033[0m'
 
 echo -e "${YELLOW}What is your cuckoo user account name?${NC}"
 read user
-su $user
+
 
 apt-get install mkisofs genisoimage -y
 sudo mkdir -p /mnt/windows_ISOs
@@ -52,6 +52,7 @@ vmcloak snapshot seven0 cuckoo1 192.168.56.2
 
 
 chown -R $user:$user ~/.vmcloak
-
+mv ~/.vmcloak /home/$user/
+echo -e "${YELLOW}The VM is located under $user home folder under .vmcloak, you will need to register this with Virtualbox.${NC}"  
 
 
