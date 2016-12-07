@@ -43,6 +43,7 @@ read -p "Would you like to install Office 2007? This WILL require an ISO and key
   fi
 echo -e "${YELLOW}Creating snapshot of VM${NC}"  
 vmcloak snapshot seven0 cuckoo1 192.168.56.2
+
 echo -e "${YELLOW}What is your cuckoo user account name?${NC}"
 read user
 chown -R $user:$user ~/.vmcloak
