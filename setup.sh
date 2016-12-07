@@ -107,6 +107,7 @@ python comm* --all --force
 #Copy over conf files
 cd $gitdir/
 cp cuckoo.conf reporting.conf virtualbox.conf /etc/cuckoo-modified/conf/
+cp vmcloak.sh $dir/
 #rm *.conf
 cd $dir
 mkdir windows_python_exe/
