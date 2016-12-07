@@ -142,5 +142,11 @@ then
 apt-get -qq install iptables-persistent -y
 fi
 echo
+read -p "Would you like to create VMs at this time? Y/N" -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+bash $dir/vmcloak.sh
+fi
+echo
 echo -e "${YELLOW}Installation complete, login as $name and open the terminal. In $name home folder you will find the start_cuckoo script. To get started as fast as possible you will need to create a virtualbox vm and name it ${RED}cuckoo1${NC}.${YELLOW} Take a snapshot after it has been created and is running the agent and python 27. Name the snapshot ${RED}vmcloak${YELLOW}. Alternatively you can create the VM with the vmcloak.sh script provided in your home directory. This will require you have a local copy of the Windows ISO you wish to use. You can then launch cuckoo_start.sh and navigate to $HOSTNAME:8000${NC}"
 
