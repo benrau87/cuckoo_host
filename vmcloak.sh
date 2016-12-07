@@ -46,7 +46,7 @@ then
     office2007.serialkey=$key
 fi
 echo
-echo -e "${YELLOW}Creating snapshot of VM${NC}"  
+echo -e "${YELLOW}Starting VM and creating a running snapshot...Please wait.${NC}"  
 vmcloak snapshot seven0 cuckoo1 192.168.56.2
 
 
