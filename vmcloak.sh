@@ -7,6 +7,10 @@ RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
+echo -e "${YELLOW}What is your cuckoo user account name?${NC}"
+read user
+su $user
+
 apt-get install mkisofs genisoimage -y
 sudo mkdir -p /mnt/windows_ISOs
 ##VMCloak
@@ -29,8 +33,8 @@ fi
 
 echo
 read -p "Would you like to install Office 2007? This WILL require an ISO and key. Y/N" -n 1 -r
-  if [[ $REPLY =~ ^[Yy]$ ]]
-  then
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
   echo
   echo -e "${YELLOW}What is the path to the iso?${NC}"
   read path
@@ -40,12 +44,14 @@ read -p "Would you like to install Office 2007? This WILL require an ISO and key
   vmcloak install seven0 office2007 \
     office2007.isopath=$path \
     office2007.serialkey=$key
-  fi
+fi
+
 echo -e "${YELLOW}Creating snapshot of VM${NC}"  
 vmcloak snapshot seven0 cuckoo1 192.168.56.2
 
-echo -e "${YELLOW}What is your cuckoo user account name?${NC}"
-read user
+
+
 chown -R $user:$user ~/.vmcloak
+
 
 
