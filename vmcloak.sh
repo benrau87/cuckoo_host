@@ -15,11 +15,9 @@ apt-get install mkisofs genisoimage -y
 sudo mkdir -p /mnt/windows_ISOs
 ##VMCloak
 echo
-read -p "Please place your Windows ISO in the folder under /mnt/windows_ISOs and enter Y to continue" -n 1 -r
+read -n 1 -s -p "Please place your Windows 7 32-bit ISO in the folder under /mnt/windows_ISOs and press any key to continue"
 echo
 
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
 pip install vmcloak --upgrade
 mount -o loop,ro  --source /mnt/windows_ISOs/*.iso --target /mnt/windows_ISOs/
 vmcloak-vboxnet0
@@ -29,7 +27,7 @@ echo
 sleep 5
 vmcloak init --vm-visible --win7x86 --iso-mount /mnt/windows_ISOs/ seven0
 vmcloak install seven0 adobe9 wic pillow dotnet40 java7
-fi
+
 
 echo
 read -p "Would you like to install Office 2007? This WILL require an ISO and key. Y/N" -n 1 -r
