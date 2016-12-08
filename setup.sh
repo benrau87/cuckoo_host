@@ -71,7 +71,6 @@ cd ssdeep-2.13
 ./configure
 make 
 make install
-apt-get -qq install python-pip -y
 pip install pydeep
 
 ##Volatility
