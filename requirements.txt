@@ -59,7 +59,6 @@ ujson==1.35
 unity-lens-photos==1.0
 urllib3==1.19.1
 vboxapi==1.0
-volatility==2.5
 wakeonlan==0.2.2
 Werkzeug==0.10.4
 wheel==0.29.0
