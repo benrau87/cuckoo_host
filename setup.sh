@@ -26,7 +26,6 @@ mkdir tools/
 cd tools/
 
 ##Depos add
-echo -e "${RED}Installing Dependencies...Please Wait${NC}"
 #Mongodb
 apt-key adv --keyserver keyserver.ubuntu.com --recv EA312927
 echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
@@ -35,8 +34,10 @@ echo "Waiting for dpkg process to free up..."
 while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
    sleep 1
 done
+echo -e "${RED}Installing Dependencies...Please Wait${NC}"
 apt-get -qq update -y
-apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump virtualbox python python-pip python-dev libvirt-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libcap2-bin python-dnspython python-bson autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
+#apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump virtualbox python python-pip python-dev libvirt-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libcap2-bin python-dnspython python-bson autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
+apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump virtualbox python python-pip python-dev python-bson python-dpkt python-jinja2 python-magic python-pymongo python-libvirt python-bottle python-pefile python-chardet swig libssl-dev clamav-daemon python-geoip geoip-database mono-utils wkhtmltopdf xvfb xfonts-100dpi libcap2-bin -y
 apt-get -qq dist-upgrade -y
 pip install --upgrade pip
 pip install -r $gitdir/requirements.txt
