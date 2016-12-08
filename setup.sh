@@ -36,7 +36,7 @@ while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
    sleep 1
 done
 apt-get -qq update -y
-apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump virtualbox python python-pip python-dev libvirt-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libcap2-bin python-dnspython -y
+apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump virtualbox python python-pip python-dev libvirt-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libcap2-bin python-dnspython autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
 apt-get -qq dist-upgrade -y
 pip install --upgrade pip
 pip install -r $gitdir/requirements.txt
@@ -50,7 +50,7 @@ systemctl enable mongodb
 setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 
 ##Yara
-apt-get install -qq autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
+#apt-get install -qq autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
 wget https://github.com/plusvic/yara/archive/v3.4.0.tar.gz -O yara-3.4.0.tar.gz
 tar -zxf yara-3.4.0.tar.gz
 cd yara-3.4.0
@@ -74,12 +74,7 @@ apt-get -qq install python-pip -y
 pip install pydeep
 
 ##Volatility
-cd $dir/tools/
-pip install openpyxl
-pip install ujson
-pip install pycrypto
-pip install distorm3
-pip install pytz 
+cd $dir/tools/ 
 git clone https://github.com/volatilityfoundation/volatility.git
 cd volatility
 python setup.py build
