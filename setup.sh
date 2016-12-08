@@ -91,6 +91,7 @@ tar -xvzf v1.0.tar.gz
 ##Cuckoo
 cd /etc/
 git clone https://github.com/spender-sandbox/cuckoo-modified.git
+##Can probably remove one of the requirements.txt docs at some point
 pip install -r cuckoo-modified/requirements.txt
 pip install django-ratelimit
 cd cuckoo-modified/utils/
