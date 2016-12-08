@@ -63,4 +63,8 @@ wakeonlan==0.2.2
 Werkzeug==0.10.4
 wheel==0.29.0
 yara-python==3.4.0
-
+git+https://github.com/crackinglandia/pype32.git
+pyvmomi>=6.0
+bs4
+python-whois
+java-random
