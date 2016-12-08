@@ -18,3 +18,6 @@ Usage:
 7) The included conf files, which are stored under /etc/cuckoo-modified/conf/ are good for one Windows 7 32-bit VM with a name of cuckoo1 and a running snapshot of vmcloak. If you need to modify them for your needs please read the offical Cuckoo Sandbox documentation.
 
 8) Run the start_cuckoo.sh script and navigate to http://localhost:8000 
+
+***Note***
+You must install the provided agent on machine created with vmcloak. Start the VM and kill the running agent on port 8000, download the modified one and restart it. Take a running snapshot and proceed.
