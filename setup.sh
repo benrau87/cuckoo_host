@@ -30,7 +30,7 @@ cd tools/
 apt-key adv --keyserver keyserver.ubuntu.com --recv EA312927
 echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 ##Holding pattern for dpkg...
-echo "Waiting for dpkg process to free up..."
+echo "${YELLOW}Waiting for dpkg process to free up...If this takes too long CTRL+C to end the script and try running ${RED}sudo rm -f /var/lib/dpkg/lock${YELLOW} before starting this again${NC}"
 while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
    sleep 1
 done
