@@ -104,11 +104,12 @@ wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz
 ##Cuckoo
 cd /etc/
 git clone https://github.com/spender-sandbox/cuckoo-modified.git
+cd cuckoo-modified/
 wget https://bitbucket.org/mstrobel/procyon/downloads/procyon-decompiler-0.5.30.jar
 ##Can probably remove one of the requirements.txt docs at some point
-sudo -H pip install -r cuckoo-modified/requirements.txt
+sudo -H pip install -r requirements.txt
 sudo -H pip install django-ratelimit
-cd cuckoo-modified/utils/
+cd utils/
 python comm* --all --force
 
 ##Copy over conf files
