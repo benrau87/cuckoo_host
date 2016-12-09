@@ -44,6 +44,7 @@ apt-get -qq install autoconf automake checkinstall clamav clamav-daemon clamav-d
 ##More deps to try
 #apt-get -qq install uthash-dev libconfig-dev libarchive-dev libtool autoconf automake checkinstall clamav clamav-daemon clamav-freshclam -y
 sudo -H pip install --upgrade pip
+sudo -H pip uninstall clamd
 sudo -H pip install -r $gitdir/requirements.txt
 ##Add user to vbox and enable mongodb
 usermod -a -G vboxusers $name
