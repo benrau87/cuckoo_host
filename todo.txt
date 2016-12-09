@@ -10,3 +10,4 @@ Future Projects
   Add VMs for OSX, Linux (Redhat?), Android
   Find out a way to incorporate modified agent to vmcloak
   Add VolUtility and VT malware download (https://github.com/jbremer/vtdl.git) or using API to cuckoo webpage
+  Suricata?
