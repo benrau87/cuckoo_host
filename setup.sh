@@ -38,6 +38,7 @@ echo -e "${RED}Installing Dependencies...Please Wait${NC}"
 apt-get -qq update -y
 #apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump virtualbox python python-pip python-dev libvirt-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libcap2-bin python-dnspython python-bson autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
 apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump ssdeep yara virtualbox python python-pip python-dev python-bson python-dpkt python-jinja2 python-magic python-pymongo python-libvirt python-bottle python-pefile python-chardet swig libssl-dev clamav-daemon python-geoip geoip-database mono-utils wkhtmltopdf xvfb xfonts-100dpi libcap2-bin -y
+apt-get -qq install uthash-dev libconfig-dev libarchive-dev libtool autoconf automake checkinstall -y
 apt-get -qq dist-upgrade -y
 pip install --upgrade pip
 pip install -r $gitdir/requirements.txt
