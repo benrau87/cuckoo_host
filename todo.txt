@@ -1,14 +1,12 @@
-
-Create autostart to start Cuckoo and Webpage at boot
-Move cuckoo-modified and VolUtility to /etc/ and create launchers for it
-
+Make sure full support for clam, ssdeep, vol, yara
+Add nginx webpage handler for authentication and SSL
 
 configuration modifications
 
-?VMCloak?
 ?Thug?
 
 Future Projects
   Incorporate into FARK and Elasticsearch
   Add VMs for OSX, Linux (Redhat?), Android
+  Find out a way to incorporate modified agent to vmcloak
   Add VolUtility and VT malware download (https://github.com/jbremer/vtdl.git) to cuckoo webpage
