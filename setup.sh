@@ -38,7 +38,8 @@ echo -e "${RED}Installing Dependencies...Please Wait${NC}"
 apt-get -qq update -y
 #apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump virtualbox python python-pip python-dev libvirt-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libcap2-bin python-dnspython python-bson autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
 apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump ssdeep yara virtualbox python python-pip python-dev python-bson python-dpkt python-jinja2 python-magic python-pymongo python-libvirt python-bottle python-pefile python-chardet swig libssl-dev clamav-daemon python-geoip geoip-database mono-utils wkhtmltopdf xvfb xfonts-100dpi libcap2-bin -y
-apt-get -qq install uthash-dev libconfig-dev libarchive-dev libtool autoconf automake checkinstall -y
+##More deps to try
+apt-get -qq install uthash-dev libconfig-dev libarchive-dev libtool autoconf automake checkinstall clamav clamav-daemon clamav-freshclam -y
 apt-get -qq dist-upgrade -y
 pip install --upgrade pip
 pip install -r $gitdir/requirements.txt
@@ -66,13 +67,22 @@ python setup.py install
 
 ##Pydeep
 cd $dir/tools/
-wget http://sourceforge.net/projects/ssdeep/files/ssdeep-2.13/ssdeep-2.13.tar.gz/download -O ssdeep-2.13.tar.gz
-tar -zxf ssdeep-2.13.tar.gz
-cd ssdeep-2.13
-./configure
-make 
+#wget http://sourceforge.net/projects/ssdeep/files/ssdeep-2.13/ssdeep-2.13.tar.gz/download -O ssdeep-2.13.tar.gz
+#tar -zxf ssdeep-2.13.tar.gz
+#cd ssdeep-2.13
+#./configure
+#make 
+#make install
+#pip install pydeep
+pip install git+https://github.com/kbandla/pydeep.git
+
+##Malheur
+cd $dir/tools/
+git clone https://github.com/rieck/malheur.git
+cd malheur
+./bootstrap
+./configure --prefix=/usr
 make install
-pip install pydeep
 
 ##Volatility
 cd $dir/tools/ 
@@ -83,10 +93,10 @@ python setup.py install
 
 ##Other tools
 cd $dir/tools/
+apt-get install libboost-all-dev -y
+pip install git+https://github.com/buffer/pyv8 
 git clone https://github.com/jpsenior/threataggregator.git
 wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz
-git clone https://github.com/jbremer/vmcloak.git
-tar -xvzf v1.0.tar.gz
 
 ##Cuckoo
 cd /etc/
