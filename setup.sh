@@ -43,8 +43,8 @@ apt-get -qq install autoconf automake checkinstall clamav clamav-daemon clamav-d
 #apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump ssdeep yara virtualbox python python-pip python-dev python-bson python-dpkt python-jinja2 python-magic python-pymongo python-libvirt python-bottle python-pefile python-chardet swig libssl-dev clamav-daemon python-geoip geoip-database mono-utils wkhtmltopdf xvfb xfonts-100dpi libcap2-bin -y
 ##More deps to try
 #apt-get -qq install uthash-dev libconfig-dev libarchive-dev libtool autoconf automake checkinstall clamav clamav-daemon clamav-freshclam -y
-pip install --upgrade pip
-pip install -r $gitdir/requirements.txt
+sudo -H pip install --upgrade pip
+sudo -H pip install -r $gitdir/requirements.txt
 ##Add user to vbox and enable mongodb
 usermod -a -G vboxusers $name
 systemctl start mongodb
@@ -76,7 +76,7 @@ cd $dir/tools/
 #make 
 #make install
 #pip install pydeep
-pip install git+https://github.com/kbandla/pydeep.git
+sudo -H pip install git+https://github.com/kbandla/pydeep.git
 
 ##Malheur
 cd $dir/tools/
@@ -96,7 +96,7 @@ python setup.py install
 ##Other tools
 cd $dir/tools/
 apt-get install libboost-all-dev -y
-pip install git+https://github.com/buffer/pyv8 
+sudo -H pip install git+https://github.com/buffer/pyv8 
 git clone https://github.com/jpsenior/threataggregator.git
 wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz
 
@@ -104,8 +104,8 @@ wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz
 cd /etc/
 git clone https://github.com/spender-sandbox/cuckoo-modified.git
 ##Can probably remove one of the requirements.txt docs at some point
-pip install -r cuckoo-modified/requirements.txt
-pip install django-ratelimit
+sudo -H pip install -r cuckoo-modified/requirements.txt
+sudo -H pip install django-ratelimit
 cd cuckoo-modified/utils/
 python comm* --all --force
 
