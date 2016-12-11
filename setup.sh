@@ -100,6 +100,7 @@ apt-get install libboost-all-dev -y
 sudo -H pip install git+https://github.com/buffer/pyv8 
 git clone https://github.com/jpsenior/threataggregator.git
 wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz
+tar -zxf v1.0*
 
 ##Cuckoo
 cd /etc/
