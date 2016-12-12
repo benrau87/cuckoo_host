@@ -112,6 +112,9 @@ sudo -H pip install -r requirements.txt
 sudo -H pip install django-ratelimit
 cd utils/
 python comm* --all --force
+cd ..
+cd data/yara/
+git clone https://github.com/yara-rules/rules.git
 
 ##Copy over conf files
 cd $gitdir/
