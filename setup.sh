@@ -127,6 +127,14 @@ cd windows_python_exe/
 wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe
 wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi
 
+##Office Decrypt
+cd /etc/cuckoo-modified/
+mkdir work
+git clone https://github.com/herumi/cybozulib
+git clone https://github.com/herumi/msoffice
+cd msoffice
+make -j RELEASE=1
+
 ##Change ownership for folder that have been created
 chown -R $name:$name /home/$name/*
 chown -R $name:$name /etc/cuckoo-modified/*
