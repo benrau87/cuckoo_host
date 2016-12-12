@@ -26,6 +26,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout cuckoo.key -out cuck
 openssl dhparam -out dhparam.pem 4096
 cd ..
 mv cuckoo /etc/nginx
+mv /etc/nginx/cuckoo /etc/nginx/ssl
 chown -R root:www-data /etc/nginx/ssl
 chmod -R u=rX,g=rX,o= /etc/nginx/ssl
 
@@ -62,14 +63,14 @@ echo "server {
     }
 
     location /storage/analysis {
-       alias /opt/cuckoo/storage/analyses/;
+       alias /etc/cuckoo-modified/storage/analyses/;
        autoindex on;
        autoindex_exact_size off;
        autoindex_localtime on;
     }
 
     location /static {
-      alias /opt/cuckoo/web/static/;
+      alias /etc/cuckoo-modified/web/static/;
     }
 }
 
