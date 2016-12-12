@@ -1,7 +1,7 @@
-Make sure full support for clam, ssdeep, vol, yara
-Add nginx webpage handler for authentication and SSL
-
-configuration modifications
+Get nginx to work
+Verify all yara rules are ran
+Fix clamav
+Incorporate suricata
 
 ?Thug?
 
@@ -10,4 +10,4 @@ Future Projects
   Add VMs for OSX, Linux (Redhat?), Android
   Find out a way to incorporate modified agent to vmcloak
   Add VolUtility and VT malware download (https://github.com/jbremer/vtdl.git) or using API to cuckoo webpage
-  Suricata?
+  
