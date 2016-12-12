@@ -115,7 +115,7 @@ python comm* --all --force
 
 ##Copy over conf files
 cd $gitdir/
-cp cuckoo.conf reporting.conf virtualbox.conf processing.conf /etc/cuckoo-modified/conf/
+cp *.conf /etc/cuckoo-modified/conf/
 ##Add vmcloak scripts 
 chmod +x vmcloak.sh
 cp vmcloak.sh $dir/
