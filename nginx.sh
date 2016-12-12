@@ -32,7 +32,6 @@ chmod -R u=rX,g=rX,o= /etc/nginx/ssl
 
 ##Remove default sites and create new cuckoo
 rm /etc/nginx/sites-enabled/default
-touch /etc/nginx/sites-available/cuckoo
 
 sudo tee -a /tmp/cuckoo <<EOF
 server {
@@ -127,6 +126,7 @@ server {
 }
 EOF
 
+mv /tmp/cuckoo /etc/nginx/sites-available/
 ln -s /etc/nginx/sites-available/cuckoo /etc/nginx/sites-enabled/cuckoo
 
 ##Create web user and secure password storage
