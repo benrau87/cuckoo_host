@@ -34,7 +34,8 @@ chmod -R u=rX,g=rX,o= /etc/nginx/ssl
 rm /etc/nginx/sites-enabled/default
 touch /etc/nginx/sites-available/cuckoo
 
-echo "server {
+sudo tee -a /tmp/cuckoo <<EOF
+server {
     listen $ipaddr:443 ssl http2;
     ssl_certificate /etc/nginx/ssl/cuckoo.crt;
     ssl_certificate_key /etc/nginx/ssl/cuckoo.key;
@@ -92,7 +93,6 @@ server {
            autoindex_localtime on;
      }
 }
-
 # Host the upstream legacy API 
 server {
     listen $ipaddr:4343 ssl http2;
@@ -125,7 +125,7 @@ server {
       deny all;
     }
 }
-" | tee -a /etc/nginx/sites-available/cuckoo
+EOF
 
 ln -s /etc/nginx/sites-available/cuckoo /etc/nginx/sites-enabled/cuckoo
 
