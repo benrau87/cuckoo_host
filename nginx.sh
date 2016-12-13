@@ -80,18 +80,18 @@ server {
 }
 
 
-server {
-  listen 192.168.100.1:8080;
+#server {
+#  listen 192.168.100.1:8080;
 
-    root /home/cuckoo/vmshared;
+#   root /home/cuckoo/vmshared;
 
-     location / {
-           try_files \$uri \$uri/ =404;
-           autoindex on;
-           autoindex_exact_size off;
-           autoindex_localtime on;
-     }
-}
+#     location / {
+#           try_files \$uri \$uri/ =404;
+#           autoindex on;
+#           autoindex_exact_size off;
+#           autoindex_localtime on;
+#     }
+#}
 # Host the upstream legacy API 
 server {
     listen $ipaddr:4343 ssl http2;
@@ -119,11 +119,11 @@ server {
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
         
         # Restrict access
-       allow IP_Address;
+       #allow IP_Address;
       #allow 192.168.1.0/24;
-      deny all;
-    }
-}
+      #deny all;
+    #}
+#}
 EOF
 
 mv /tmp/cuckoo /etc/nginx/sites-available/
