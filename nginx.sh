@@ -136,6 +136,8 @@ htpasswd -c /etc/nginx/htpasswd $webuser
 chown root:www-data /etc/nginx/htpasswd
 chmod u=rw,g=r,o= /etc/nginx/htpasswd
 
+##Create and restart service
+systemctl enable nginx.service
 service nginx restart
 
 
