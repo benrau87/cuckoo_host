@@ -30,7 +30,7 @@ mv /etc/nginx/cuckoo /etc/nginx/ssl
 chown -R root:www-data /etc/nginx/ssl
 chmod -R u=rX,g=rX,o= /etc/nginx/ssl
 
-##Remove default sites and create new cuckoo
+##Remove default sites and create new cuckoo site
 rm /etc/nginx/sites-enabled/default
 
 sudo tee -a /tmp/cuckoo <<EOF
