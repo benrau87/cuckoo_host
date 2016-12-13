@@ -116,6 +116,9 @@ python comm* --all --force
 cd ..
 cd data/yara/
 git clone https://github.com/yara-rules/rules.git
+cp rules/**/*.yar /etc/cuckoo-modified/data/yara/binaries/
+##Remove Android rules for now
+mv /etc/cuckoo-modified/data/yara/binaries/Android* /etc/cuckoo-modified/data/yara/rules/
 
 ##Copy over conf files
 cd $gitdir/
@@ -161,7 +164,7 @@ while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
    sleep 1
 done
 ##DAMN THING NEVER INSTALLS!!!!!!
-sudo -H pip install distrom3
+sudo -H pip install distorm3
 ##RANT OVER
 echo
 read -p "Do you want to iptable changes persistent? Y/N" -n 1 -r
