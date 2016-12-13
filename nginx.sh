@@ -57,9 +57,9 @@ server {
 
     location / {
         proxy_pass http://127.0.0.1:8000;
-        proxy_set_header Host '$host';
-        proxy_set_header X-Real-IP '$remote_addr';
-        proxy_set_header X-Forwarded-For '$proxy_add_x_forwarded_for';
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
     }
 
     location /storage/analysis {
@@ -76,7 +76,7 @@ server {
 
 server {
     listen $ipaddr:80 http2;
-    return 301 https://'$server_name$request_uri';
+    return 301 https://\$server_name$request_uri;
 }
 
 
@@ -86,7 +86,7 @@ server {
     root /home/cuckoo/vmshared;
 
      location / {
-           try_files '$uri' '$uri'/ =404;
+           try_files \$uri \$uri/ =404;
            autoindex on;
            autoindex_exact_size off;
            autoindex_localtime on;
@@ -114,9 +114,9 @@ server {
 
     location / {
         proxy_pass http://127.0.0.1:8001;
-        proxy_set_header Host '$host';
-        proxy_set_header X-Real-IP '$remote_addr';
-        proxy_set_header X-Forwarded-For '$proxy_add_x_forwarded_for';
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
         
         # Restrict access
        allow IP_Address;
