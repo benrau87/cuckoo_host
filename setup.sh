@@ -97,6 +97,17 @@ cd volatility
 python setup.py build
 python setup.py install
 
+##Suricata
+mkdir /etc/suricata/rules/cuckoo.rules
+echo "alert http any any -> any any (msg:\"FILE store all\"; filestore; noalert; sid:15; rev:1;)"  | sudo tee /etc/suricata/rules/cuckoo.rules
+cp $gitdir/suricata-cuckoo.yaml /etc/suricata/
+cd $dir/tools/
+git clone https://github.com/seanthegeek/etupdate
+cd etupdate
+mv etupdate /usr/sbin/
+/usr/sbin/etupdate -V
+crontab -u $name $gitdir/cron
+
 ##Other tools
 cd $dir/tools/
 apt-get install libboost-all-dev -y
