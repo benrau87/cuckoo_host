@@ -29,6 +29,8 @@ cd tools/
 #Mongodb
 apt-key adv --keyserver keyserver.ubuntu.com --recv EA312927
 echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+##Suricata
+add-apt-repository ppa:oisf/suricata-beta
 ##Holding pattern for dpkg...
 echo -e "${YELLOW}Waiting for dpkg process to free up...If this takes too long try running ${RED}sudo rm -f /var/lib/dpkg/lock${YELLOW} in another terminal window.${NC}"
 while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
@@ -37,8 +39,8 @@ done
 echo
 echo -e "${RED}Installing Dependencies...Please Wait${NC}"
 apt-get -qq update && sudo apt-get upgrade -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y
-
-apt-get -qq install autoconf automake checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libjpeg-dev libmagic1 libssl-dev libtool libvirt-dev mongodb-org=3.2.11 mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara -y
+ 
+apt-get -qq install autoconf automake checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libhtp1 libjpeg-dev libmagic1 libssl-dev libtool libvirt-dev mongodb-org=3.2.11 mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara suricata ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara -y
 
 #apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump virtualbox python python-pip python-dev libvirt-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libcap2-bin python-dnspython python-bson autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
 #apt-get -qq install wireshark mongodb-org=3.2.11 tcpdump ssdeep yara virtualbox python python-pip python-dev python-bson python-dpkt python-jinja2 python-magic python-pymongo python-libvirt python-bottle python-pefile python-chardet swig libssl-dev clamav-daemon python-geoip geoip-database mono-utils wkhtmltopdf xvfb xfonts-100dpi libcap2-bin -y
