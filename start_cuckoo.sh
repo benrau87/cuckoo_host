@@ -8,7 +8,19 @@ else
 VBoxManage hostonlyif create
 VBoxManage hostonlyif ipconfig vboxnet0 --ip 192.168.56.1
 fi
-#VBoxManage startvm --type headless 'Win7 Clone'
+
+cd /etc/cuckoo-modified/utils/
+rm -f /tmp/gitpull_output.txt
+git pull > /tmp/gitpull_output.txt
+
+if grep -Fxq "Already up-to-date" /tmp/gitpull_output.txt
+then
+echo "Signatures are up to date."
+else
+git pull
+./community --force --all
+fi
+
 cd /etc/cuckoo-modified/web/
 ./manage.py migrate
 ./manage.py runserver 127.0.0.1:8000 &
