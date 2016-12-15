@@ -124,8 +124,8 @@ server {
        #allow IP_Address;
       #allow 192.168.1.0/24;
       #deny all;
-    #}
-#}
+    }
+}
 EOF
 
 mv /tmp/cuckoo /etc/nginx/sites-available/
