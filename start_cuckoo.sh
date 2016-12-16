@@ -18,7 +18,7 @@ then
 echo "Signatures are up to date."
 else
 git pull
-./community --force --all
+python /etc/cuckoo-modified/utils/community.py --force --all
 fi
 
 cd /etc/cuckoo-modified/web/
