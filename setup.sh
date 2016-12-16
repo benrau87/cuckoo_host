@@ -106,6 +106,7 @@ git clone https://github.com/seanthegeek/etupdate
 cd etupdate
 mv etupdate /usr/sbin/
 /usr/sbin/etupdate -V
+chown $name:$name /usr/sbin/etupdate
 crontab -u $name $gitdir/cron
 
 ##Other tools
