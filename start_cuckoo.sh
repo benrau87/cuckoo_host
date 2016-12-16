@@ -11,16 +11,16 @@ fi
 
 cd /etc/cuckoo-modified/utils/
 rm -f /tmp/gitpull_output.txt
-git pull > /tmp/gitpull_output.txt
+git checkout > /tmp/gitpull_output.txt
 
-if grep -Fxq "Already up-to-date" /tmp/gitpull_output.txt
+if grep -Fxq "Your branch is behind" /tmp/gitpull_output.txt
 then
-echo "Signatures are up to date."
+echo "Your branch is behind, you may think of updating with git pull."
 else
-git pull
-python /etc/cuckoo-modified/utils/community.py --force --all
+echo "You are up to date."
 fi
 
+python /etc/cuckoo-modified/utils/community.py --force --all
 cd /etc/cuckoo-modified/web/
 ./manage.py migrate
 ./manage.py runserver 127.0.0.1:8000 &
