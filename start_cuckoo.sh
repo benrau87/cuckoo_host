@@ -15,9 +15,9 @@ git checkout > /tmp/gitpull_output.txt
 
 if grep -Fxq "Your branch is behind" /tmp/gitpull_output.txt
 then
-echo "Your branch is behind, you may think of updating with git pull."
-else
 echo "You are up to date."
+else
+echo "Your branch is behind, you may think of updating with git pull."
 fi
 
 python /etc/cuckoo-modified/utils/community.py --force --all
