@@ -107,6 +107,7 @@ cd etupdate
 mv etupdate /usr/sbin/
 /usr/sbin/etupdate -V
 chown $name:$name /usr/sbin/etupdate
+chown -R $name:$name /etc/suricata/rules
 crontab -u $name $gitdir/cron
 
 ##Other tools
