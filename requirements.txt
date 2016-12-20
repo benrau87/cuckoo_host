@@ -41,7 +41,7 @@ pycparser==2.14
 pycrypto==2.6.1
 pydeep==0.2
 pygal==2.3.1
-pymisp==2.4.49
+pymisp==2.4.56
 pymongo==3.0.3
 pyOpenSSL==0.15.1
 python-dateutil==2.4.2
