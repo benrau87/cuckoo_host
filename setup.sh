@@ -132,8 +132,11 @@ cd ..
 cd data/yara/
 git clone https://github.com/yara-rules/rules.git
 cp rules/**/*.yar /etc/cuckoo-modified/data/yara/binaries/
-##Remove Android rules for now
+
+##Remove Android and none working rules for now
 mv /etc/cuckoo-modified/data/yara/binaries/Android* /etc/cuckoo-modified/data/yara/rules/
+rm /etc/cuckoo-modified/data/yara/binaries/vmdetect.yar
+rm /etc/cuckoo-modified/data/yara/binaries/antidebug_antivm.yar
 
 ##Copy over conf files
 cd $gitdir/
