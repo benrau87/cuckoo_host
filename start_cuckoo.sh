@@ -1,5 +1,5 @@
 #!/bin/bash
-ON=$(ifconfig | grep -cs 'vboxnet')
+ON=$(ifconfig -a | grep -cs 'vboxnet')
 
 if [[ $ON == 1 ]]
 then
