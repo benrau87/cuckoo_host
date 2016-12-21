@@ -1,5 +1,9 @@
 #!/bin/bash
-ON=$(ifconfig -a | grep -cs 'vboxnet')
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+ON=$(ifconfig -a | grep -cs 'vboxnet0')
 
 if [[ $ON == 1 ]]
 then
@@ -13,11 +17,11 @@ cd /etc/cuckoo-modified/utils/
 rm -f /tmp/gitpull_output.txt
 git checkout > /tmp/gitpull_output.txt
 
-if grep -Fxq "Your branch is behind" /tmp/gitpull_output.txt
+if grep -q "behind" /tmp/gitpull_output.txt
 then
-echo "You are up to date."
+echo -e "${YELLOW}Your branch is behind, you may think of updating with git pull.${NC}"
 else
-echo "Your branch is behind, you may think of updating with git pull."
+echo "Your branch is up to date"
 fi
 
 python /etc/cuckoo-modified/utils/community.py --force --all
