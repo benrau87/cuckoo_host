@@ -280,6 +280,7 @@ done
 ##DAMN THING NEVER INSTALLS!!!!!!
 sudo -H pip install distorm3
 ##RANT OVER
+wait 1
 echo
 read -p "Do you want to iptable changes persistent? Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
