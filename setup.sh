@@ -136,10 +136,10 @@ print_status "${YELLOW}Performing apt-get update and upgrade (May take a while i
 apt-get update &>> $logfile && apt-get -y upgrade &>> $logfile
 error_check 'System updates'
 
-print_status "${YELLOW}Installing:${NC} autoconf automake checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libhtp1 libjpeg-dev libmagic1 libssl-dev libtool libvirt-dev mongodb-org=3.2.11 mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara suricata ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara .."
+print_status "${YELLOW}Installing:${NC} autoconf automake bison checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool flex geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libhtp1 libjpeg-dev libmagic1 libssl-dev libtool libvirt-dev mongodb-org=3.2.11 mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara suricata ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara .."
 
 #mongodb-org=3.2.11
-declare -a packages=(autoconf automake checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libhtp1 libjpeg-dev libmagic1 libssl-dev libtool libvirt-dev mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara suricata ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara);
+declare -a packages=(autoconf automake bison checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool flex geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libhtp1 libjpeg-dev libmagic1 libssl-dev libtool libvirt-dev mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara suricata ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara);
 install_packages ${packages[@]}
  
 
@@ -170,8 +170,9 @@ print_status "${YELLOW}Setting up Yara${NC}"
 #apt-get install -qq autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
 wget https://github.com/VirusTotal/yara/archive/v3.5.0.tar.gz &>> $logfile
 error_check 'Yara download'
-tar -zxf yara-3.5.0.tar.gz &>> $logfile
+tar -zxf v3.5.0.tar.gz &>> $logfile
 cd yara-3.5.0
+./bootstrap.sh &>> $logfile
 ./configure --with-crypto --enable-cuckoo --enable-magic &>> $logfile
 make &>> $logfile
 make install &>> $logfile
