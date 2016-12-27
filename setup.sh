@@ -167,17 +167,14 @@ setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 ##Yara
 print_status "${YELLOW}Setting up Yara${NC}"
 #apt-get install -qq autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
-wget https://github.com/plusvic/yara/archive/v3.4.0.tar.gz -O yara-3.4.0.tar.gz &>> $logfile
+https://github.com/VirusTotal/yara/archive/v3.5.0.tar.gz &>> $logfile
 error_check 'Yara download'
-tar -zxf yara-3.4.0.tar.gz
-cd yara-3.4.0
-./bootstrap.sh &>> $logfile
+tar -zxf yara-3.5.0.tar.gz &>> $logfile
+cd yara-3.5.0
 ./configure --with-crypto --enable-cuckoo --enable-magic &>> $logfile
 make &>> $logfile
 make install &>> $logfile
-cd yara-python
-python setup.py build &>> $logfile
-python setup.py install &>> $logfile
+make check &>> $logfile
 error_check 'Yara install'
 
 ##Pydeep
