@@ -118,12 +118,12 @@ cd tools/
 export DEBIAN_FRONTEND=noninteractive
 
 echo
-print_status "${YELLOW}Installing Dependencies...Please Wait${NC}"
+print_status "${YELLOW}Adding Repositories...Please Wait${NC}"
 #Mongodb
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
-echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 &>> $logfile
+echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list &>> $logfile
 ##Suricata
-add-apt-repository ppa:oisf/suricata-beta -y
+add-apt-repository ppa:oisf/suricata-beta -y &>> $logfile
 ##Holding pattern for dpkg...
 print_status "${YELLOW}Waiting for dpkg process to free up...If this takes too long try running ${RED}sudo rm -f /var/lib/dpkg/lock${YELLOW} in another terminal window."
 while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
