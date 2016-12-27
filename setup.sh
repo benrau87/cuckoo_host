@@ -61,7 +61,7 @@ fi
 function install_packages()
 {
 
-apt-get update &>> $logfile && apt-get install -y ${@} &>> $logfile
+apt-get update &>> $logfile && apt-get install -y --allow-unauthenticated ${@} &>> $logfile
 error_check 'Package installation'
 
 }
