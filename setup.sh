@@ -111,6 +111,7 @@ cp mongodb.service /etc/systemd/system/
 cd /home/$name/
 dir=$PWD
 dir_check /home/$name/tools
+rm -rf /home/$name/tools/*
 cd tools/
 
 ##Depos add
