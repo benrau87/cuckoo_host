@@ -143,10 +143,11 @@ install_packages ${packages[@]}
 
 print_status "${YELLOW}Installing PIP requirments...Please Wait${NC}"
 sudo -H pip install --upgrade pip &>> $logfile
-sudo -H pip uninstall clamd &>> $logfile
 sudo -H pip install -r $gitdir/requirements.txt &>> $logfile
+sudo -H pip uninstall clamd &>> $logfile
 
 ##Add user to vbox and enable mongodb
+print_status "${YELLOW}Setting up mongodb${NC}"
 usermod -a -G vboxusers $name
 systemctl start mongodb
 sleep 10
@@ -156,19 +157,21 @@ systemctl enable mongodb
 setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 
 ##Yara
+print_status "${YELLOW}Setting up Yara${NC}"
 #apt-get install -qq autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
 wget https://github.com/plusvic/yara/archive/v3.4.0.tar.gz -O yara-3.4.0.tar.gz
 tar -zxf yara-3.4.0.tar.gz
 cd yara-3.4.0
-./bootstrap.sh
-./configure --with-crypto --enable-cuckoo --enable-magic
-make 
-make install
+./bootstrap.sh >> $logfile
+./configure --with-crypto --enable-cuckoo --enable-magic >> $logfile
+make >> $logfile
+make install >> $logfile
 cd yara-python
-python setup.py build
-python setup.py install
+python setup.py build >> $logfile
+python setup.py install >> $logfile
 
 ##Pydeep
+print_status "${YELLOW}Setting up pydeep${NC}"
 cd $dir/tools/
 #wget http://sourceforge.net/projects/ssdeep/files/ssdeep-2.13/ssdeep-2.13.tar.gz/download -O ssdeep-2.13.tar.gz
 #tar -zxf ssdeep-2.13.tar.gz
@@ -177,7 +180,7 @@ cd $dir/tools/
 #make 
 #make install
 #pip install pydeep
-sudo -H pip install git+https://github.com/kbandla/pydeep.git
+sudo -H pip install git+https://github.com/kbandla/pydeep.git >> $logfile
 
 ##Malheur
 cd $dir/tools/
