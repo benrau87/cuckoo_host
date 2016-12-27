@@ -269,12 +269,12 @@ cd data/yara/
 print_status "${YELLOW}Downloading Yara Rules...Please wait${NC}"
 git clone https://github.com/yara-rules/rules.git &>> $logfile
 cp rules/**/*.yar /etc/cuckoo-modified/data/yara/binaries/ &>> $logfile
+##Remove Android and none working rules for now
+mv /etc/cuckoo-modified/data/yara/binaries/Android* /etc/cuckoo-modified/data/yara/rules/  &>> $logfile
+rm /etc/cuckoo-modified/data/yara/binaries/vmdetect.yar  &>> $logfile
+rm /etc/cuckoo-modified/data/yara/binaries/antidebug_antivm.yar  &>> $logfile
 error_check 'Adding Yara rules'
 
-##Remove Android and none working rules for now
-mv /etc/cuckoo-modified/data/yara/binaries/Android* /etc/cuckoo-modified/data/yara/rules/
-rm /etc/cuckoo-modified/data/yara/binaries/vmdetect.yar
-rm /etc/cuckoo-modified/data/yara/binaries/antidebug_antivm.yar
 
 ##Copy over conf files
 cd $gitdir/
@@ -287,16 +287,20 @@ cd $dir
 mkdir windows_python_exe/
 cp /etc/cuckoo-modified/agent/agent.py $dir/windows_python_exe/
 cd windows_python_exe/
-wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe
-wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi
+print_status "${YELLOW}Downloading Windows Python Depos${NC}"
+wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe &>> $logfile
+wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi &>> $logfile
+error_check 'Windows depos download'
 
 ##Office Decrypt
 cd /etc/cuckoo-modified/
-mkdir work
-git clone https://github.com/herumi/cybozulib
-git clone https://github.com/herumi/msoffice
+dir_check work
+print_status "${YELLOW}Downloading Office Decrypt${NC}"
+git clone https://github.com/herumi/cybozulib &>> $logfile
+git clone https://github.com/herumi/msoffice &>> $logfile
 cd msoffice
-make -j RELEASE=1
+make -j RELEASE=1 &>> $logfile
+error_check 'Office decrypt install'
 
 ##Change ownership for folder that have been created
 chown -R $name:$name /home/$name/*
@@ -315,12 +319,13 @@ sudo sysctl -w net.ipv4.ip_forward=1
 #iptables -A INPUT -s 0.0.0.0 -p tcp --destination-port 27017 -m state --state NEW,ESTABLISHED -j ACCEPT
 #iptables -A OUTPUT -d 0.0.0.0 -p tcp --source-port 27017 -m state --state ESTABLISHED -j ACCEPT
 
-echo "Waiting for dpkg process to free up..."
+print_status "${YELLOW}Waiting for dpkg process to free up...${NC}"
+print_status "${YELLOW}If this takes too long try running ${RED}sudo rm -f /var/lib/dpkg/lock${YELLOW} in another terminal window.${NC}"
 while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
    sleep 1
 done
 ##DAMN THING NEVER INSTALLS!!!!!!
-sudo -H pip install distorm3
+sudo -H pip install distorm3 &>> $logfile
 ##RANT OVER
 wait 1
 echo
@@ -342,7 +347,8 @@ read -p "Would you like to harden this host from malware Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 echo
-apt-get install -qq unattended-upgrades apt-listchanges fail2ban -y
+apt-get install -qq unattended-upgrades apt-listchanges fail2ban -y  &>> $logfile
+error_check 'Security upgrades'
 fi
 echo
 read -p "Would you like secure the Cuckoo webserver with SSL? Y/N" -n 1 -r
