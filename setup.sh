@@ -145,9 +145,10 @@ print_status "${YELLOW}Installing PIP requirments...Please Wait${NC}"
 sudo -H pip install --upgrade pip &>> $logfile
 error_check 'PIP upgrade'
 sudo -H pip install -r $gitdir/requirements.txt &>> $logfile
-error_check 'PIP install'
+error_check 'PIP requirements install'
 sudo -H pip uninstall clamd &>> $logfile
 error_check 'Clamd uninistall'
+
 ##Add user to vbox and enable mongodb
 print_status "${YELLOW}Setting up mongodb${NC}"
 usermod -a -G vboxusers $name
@@ -171,9 +172,10 @@ make install >> $logfile
 cd yara-python
 python setup.py build >> $logfile
 python setup.py install >> $logfile
+error_check 'Yara install'
 
 ##Pydeep
-print_status "${YELLOW}Setting up pydeep${NC}"
+print_status "${YELLOW}Setting up Pydeep${NC}"
 cd $dir/tools/
 #wget http://sourceforge.net/projects/ssdeep/files/ssdeep-2.13/ssdeep-2.13.tar.gz/download -O ssdeep-2.13.tar.gz
 #tar -zxf ssdeep-2.13.tar.gz
@@ -183,41 +185,49 @@ cd $dir/tools/
 #make install
 #pip install pydeep
 sudo -H pip install git+https://github.com/kbandla/pydeep.git >> $logfile
+error_check 'Pydeep install'
 
 ##Malheur
+print_status "${YELLOW}Setting up Malheur${NC}"
 cd $dir/tools/
-git clone https://github.com/rieck/malheur.git
+git clone https://github.com/rieck/malheur.git >> $logfile
 cd malheur
-./bootstrap
-./configure --prefix=/usr
-make install
+./bootstrap >> $logfile
+./configure --prefix=/usr >> $logfile
+make install >> $logfile
+error_check 'Malheur install'
 
 ##Volatility
+print_status "${YELLOW}Setting up Volatility${NC}"
 cd $dir/tools/ 
-git clone https://github.com/volatilityfoundation/volatility.git
+git clone https://github.com/volatilityfoundation/volatility.git >> $logfile
 cd volatility
-python setup.py build
-python setup.py install
+python setup.py build >> $logfile
+python setup.py install >> $logfile
+error_check 'Volatility install'
 
 ##Suricata
+print_status "${YELLOW}Setting up Suricata${NC}"
 mkdir /etc/suricata/rules/cuckoo.rules
-echo "alert http any any -> any any (msg:\"FILE store all\"; filestore; noalert; sid:15; rev:1;)"  | sudo tee /etc/suricata/rules/cuckoo.rules
+echo "alert http any any -> any any (msg:\"FILE store all\"; filestore; noalert; sid:15; rev:1;)"  | sudo tee /etc/suricata/rules/cuckoo.rules >> $logfile
 cp $gitdir/suricata-cuckoo.yaml /etc/suricata/
 cd $dir/tools/
-git clone https://github.com/seanthegeek/etupdate
+git clone https://github.com/seanthegeek/etupdate >> $logfile
 cd etupdate
 mv etupdate /usr/sbin/
-/usr/sbin/etupdate -V
+/usr/sbin/etupdate -V >> $logfile
+error_check 'Suricata install'
 chown $name:$name /usr/sbin/etupdate
 chown -R $name:$name /etc/suricata/rules
 crontab -u $name $gitdir/cron
 
 ##Other tools
+print_status "${YELLOW}Grabbing other tools${NC}"
 cd $dir/tools/
-apt-get install libboost-all-dev -y
-sudo -H pip install git+https://github.com/buffer/pyv8 
-git clone https://github.com/jpsenior/threataggregator.git
-wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz
+apt-get install libboost-all-dev -y >> $logfile
+sudo -H pip install git+https://github.com/buffer/pyv8 >> $logfile
+git clone https://github.com/jpsenior/threataggregator.git >> $logfile
+wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz >> $logfile
 tar -zxf v1.0*
 
 ##Cuckoo
