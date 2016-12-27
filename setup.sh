@@ -110,7 +110,7 @@ cp mongodb.service /etc/systemd/system/
 ##Create directories for later
 cd /home/$name/
 dir=$PWD
-mkdir tools/
+dir_check /home/$name/tools
 cd tools/
 
 ##Depos add
