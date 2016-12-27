@@ -145,7 +145,7 @@ print_status "${YELLOW}Installing PIP requirments...Please Wait${NC}"
 sudo -H pip install --upgrade pip &>> $logfile
 error_check 'PIP upgrade'
 sudo -H pip install -r $gitdir/requirements.txt &>> $logfile
-error_check 'PIP requirements install'
+error_check 'PIP requirements installation'
 
 print_status "${YELLOW}Uninstalling clamd if needed...Please Wait${NC}"
 sudo -H pip uninstall clamd -y &>> $logfile
