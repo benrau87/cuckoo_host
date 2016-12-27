@@ -141,9 +141,9 @@ install_packages ${packages[@]}
  
 
 print_status "${YELLOW}Installing PIP requirments...Please Wait${NC}"
-sudo -H pip install --upgrade pip
-sudo -H pip uninstall clamd
-sudo -H pip install -r $gitdir/requirements.txt
+sudo -H pip install --upgrade pip &>> $logfile
+sudo -H pip uninstall clamd &>> $logfile
+sudo -H pip install -r $gitdir/requirements.txt &>> $logfile
 
 ##Add user to vbox and enable mongodb
 usermod -a -G vboxusers $name
