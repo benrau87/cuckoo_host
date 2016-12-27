@@ -171,7 +171,7 @@ setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 ##Yara
 print_status "${YELLOW}Downloading Yara${NC}"
 #wget https://github.com/VirusTotal/yara/archive/v3.5.0.tar.gz &>> $logfile
-git clone https://github.com/VirusTotal/yara.git
+git clone https://github.com/VirusTotal/yara.git &>> $logfile
 error_check 'Yara download'
 #tar -zxf v3.5.0.tar.gz &>> $logfile
 print_status "${YELLOW}Installing Yara${NC}"
