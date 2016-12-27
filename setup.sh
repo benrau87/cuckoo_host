@@ -169,13 +169,14 @@ error_check 'Mongodb setup'
 setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 
 ##Yara
-#apt-get install -qq autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
 print_status "${YELLOW}Downloading Yara${NC}"
-wget https://github.com/VirusTotal/yara/archive/v3.5.0.tar.gz &>> $logfile
+#wget https://github.com/VirusTotal/yara/archive/v3.5.0.tar.gz &>> $logfile
+git clone https://github.com/VirusTotal/yara.git
 error_check 'Yara download'
-tar -zxf v3.5.0.tar.gz &>> $logfile
+#tar -zxf v3.5.0.tar.gz &>> $logfile
 print_status "${YELLOW}Installing Yara${NC}"
-cd yara-3.5.0
+#cd yara-3.5.0
+cd yara/
 ./bootstrap.sh &>> $logfile
 ./configure --with-crypto --enable-cuckoo --enable-magic &>> $logfile
 error_check 'Yara compile'
