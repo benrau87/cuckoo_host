@@ -146,6 +146,8 @@ sudo -H pip install --upgrade pip &>> $logfile
 error_check 'PIP upgrade'
 sudo -H pip install -r $gitdir/requirements.txt &>> $logfile
 error_check 'PIP requirements install'
+
+print_status "${YELLOW}Uninstalling clamd if needed...Please Wait${NC}"
 sudo -H pip uninstall clamd &>> $logfile
 error_check 'Clamd uninistall'
 
