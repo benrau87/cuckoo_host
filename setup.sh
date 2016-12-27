@@ -168,6 +168,7 @@ setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 ##Yara
 print_status "${YELLOW}Setting up Yara${NC}"
 #apt-get install -qq autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
+print_status "${YELLOW}Downloading Yara${NC}"
 wget https://github.com/VirusTotal/yara/archive/v3.5.0.tar.gz &>> $logfile
 error_check 'Yara download'
 tar -zxf v3.5.0.tar.gz &>> $logfile
@@ -224,10 +225,11 @@ git clone https://github.com/seanthegeek/etupdate &>> $logfile
 cd etupdate
 mv etupdate /usr/sbin/
 /usr/sbin/etupdate -V &>> $logfile
-error_check 'Suricata update and configuration'
-chown $name:$name /usr/sbin/etupdate
-chown -R $name:$name /etc/suricata/rules
-crontab -u $name $gitdir/cron
+error_check 'Suricata updated'
+chown $name:$name /usr/sbin/etupdate &>> $logfile
+chown -R $name:$name /etc/suricata/rules &>> $logfile
+crontab -u $name $gitdir/cron &>> $logfile
+error_check 'Suricata configured for auto-update'
 
 ##Other tools
 print_status "${YELLOW}Grabbing other tools${NC}"
@@ -236,25 +238,34 @@ apt-get install libboost-all-dev -y &>> $logfile
 sudo -H pip install git+https://github.com/buffer/pyv8 &>> $logfile
 error_check 'PyV8 install'
 git clone https://github.com/jpsenior/threataggregator.git &>> $logfile
-error_check 'Threat Aggregator'
+error_check 'Threat Aggregator download'
 wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz &>> $logfile
-error_check 'Volutility'
+error_check 'Volutility download'
 tar -zxf v1.0*
 
 ##Cuckoo
 cd /etc/
-git clone https://github.com/spender-sandbox/cuckoo-modified.git
+print_status "${YELLOW}Downloading Cuckoo${NC}"
+git clone https://github.com/spender-sandbox/cuckoo-modified.git  &>> $logfile
+error_check 'Cuckoo download'
 cd cuckoo-modified/
-wget https://bitbucket.org/mstrobel/procyon/downloads/procyon-decompiler-0.5.30.jar
+print_status "${YELLOW}Downloading Java tools${NC}"
+wget https://bitbucket.org/mstrobel/procyon/downloads/procyon-decompiler-0.5.30.jar  &>> $logfile
+error_check 'Java tools download'
 ##Can probably remove one of the requirements.txt docs at some point
-sudo -H pip install -r requirements.txt
-sudo -H pip install django-ratelimit
+print_status "${YELLOW}Installing any dependencies that may have been missed...Please wait${NC}"
+sudo -H pip install -r requirements.txt &>> $logfile
+sudo -H pip install django-ratelimit &>> $logfile
+error_check 'Cuckoo dependencies'
 cd utils/
-python comm* --all --force
+python comm* --all --force &>> $logfile
+error_check 'Community signature update'
 cd ..
 cd data/yara/
-git clone https://github.com/yara-rules/rules.git
-cp rules/**/*.yar /etc/cuckoo-modified/data/yara/binaries/
+print_status "${YELLOW}Downloading Yara Rules...Please wait${NC}"
+git clone https://github.com/yara-rules/rules.git &>> $logfile
+cp rules/**/*.yar /etc/cuckoo-modified/data/yara/binaries/ &>> $logfile
+error_check 'Adding Yara rules'
 
 ##Remove Android and none working rules for now
 mv /etc/cuckoo-modified/data/yara/binaries/Android* /etc/cuckoo-modified/data/yara/rules/
