@@ -117,14 +117,14 @@ cd tools/
 #this is a nice little hack I found in stack exchange to suppress messages during package installation.
 export DEBIAN_FRONTEND=noninteractive
 echo
-echo -e "${RED}Installing Dependencies...Please Wait${NC}"
+print_status "Installing Dependencies...Please Wait"
 #Mongodb
 apt-key adv --keyserver keyserver.ubuntu.com --recv EA312927
 echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 ##Suricata
 add-apt-repository ppa:oisf/suricata-beta -y
 ##Holding pattern for dpkg...
-echo -e "${YELLOW}Waiting for dpkg process to free up...If this takes too long try running ${RED}sudo rm -f /var/lib/dpkg/lock${YELLOW} in another terminal window.${NC}"
+print_status "Waiting for dpkg process to free up...If this takes too long try running ${RED}sudo rm -f /var/lib/dpkg/lock${YELLOW} in another terminal window."
 while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
    sleep 1
 done
@@ -140,7 +140,7 @@ declare -a packages=(autoconf automake checkinstall clamav clamav-daemon clamav-
 install_packages ${packages[@]}
  
 
-echo -e "${RED}Installing PIP requirments...Please Wait${NC}"
+print_status "Installing PIP requirments...Please Wait"
 sudo -H pip install --upgrade pip
 sudo -H pip uninstall clamd
 sudo -H pip install -r $gitdir/requirements.txt
