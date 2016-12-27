@@ -167,7 +167,7 @@ setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 ##Yara
 print_status "${YELLOW}Setting up Yara${NC}"
 #apt-get install -qq autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
-https://github.com/VirusTotal/yara/archive/v3.5.0.tar.gz &>> $logfile
+wget https://github.com/VirusTotal/yara/archive/v3.5.0.tar.gz &>> $logfile
 error_check 'Yara download'
 tar -zxf yara-3.5.0.tar.gz &>> $logfile
 cd yara-3.5.0
