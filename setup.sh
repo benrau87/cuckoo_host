@@ -116,6 +116,7 @@ cd tools/
 ##Depos add
 #this is a nice little hack I found in stack exchange to suppress messages during package installation.
 export DEBIAN_FRONTEND=noninteractive
+
 echo
 print_status "${YELLOW}Installing Dependencies...Please Wait${NC}"
 #Mongodb
