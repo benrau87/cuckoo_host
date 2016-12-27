@@ -143,13 +143,13 @@ declare -a packages=(autoconf automake bison checkinstall clamav clamav-daemon c
 install_packages ${packages[@]}
  
 
-print_status "${YELLOW}Installing PIP requirments...Please Wait${NC}"
+print_status "${YELLOW}Installing PIP requirments${NC}"
 sudo -H pip install --upgrade pip &>> $logfile
 error_check 'PIP upgrade'
 sudo -H pip install -r $gitdir/requirements.txt &>> $logfile
 error_check 'PIP requirements installation'
 
-print_status "${YELLOW}Uninstalling Clamd if needed...Please Wait${NC}"
+print_status "${YELLOW}Uninstalling Clamd if needed${NC}"
 sudo -H pip uninstall clamd -y &>> $logfile
 error_check 'Clamd uninistall'
 
@@ -166,12 +166,12 @@ error_check 'Mongodb setup'
 setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 
 ##Yara
-print_status "${YELLOW}Setting up Yara${NC}"
 #apt-get install -qq autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
 print_status "${YELLOW}Downloading Yara${NC}"
 wget https://github.com/VirusTotal/yara/archive/v3.5.0.tar.gz &>> $logfile
 error_check 'Yara download'
 tar -zxf v3.5.0.tar.gz &>> $logfile
+print_status "${YELLOW}Installing Yara${NC}"
 cd yara-3.5.0
 ./bootstrap.sh &>> $logfile
 ./configure --with-crypto --enable-cuckoo --enable-magic &>> $logfile
