@@ -167,17 +167,17 @@ setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 ##Yara
 print_status "${YELLOW}Setting up Yara${NC}"
 #apt-get install -qq autoconf libtool libjansson-dev libmagic-dev libssl-dev -y
-wget https://github.com/plusvic/yara/archive/v3.4.0.tar.gz -O yara-3.4.0.tar.gz >> $logfile
+wget https://github.com/plusvic/yara/archive/v3.4.0.tar.gz -O yara-3.4.0.tar.gz &>> $logfile
 error_check 'Yara download'
 tar -zxf yara-3.4.0.tar.gz
 cd yara-3.4.0
-./bootstrap.sh >> $logfile
-./configure --with-crypto --enable-cuckoo --enable-magic >> $logfile
-make >> $logfile
-make install >> $logfile
+./bootstrap.sh &>> $logfile
+./configure --with-crypto --enable-cuckoo --enable-magic &>> $logfile
+make &>> $logfile
+make install &>> $logfile
 cd yara-python
-python setup.py build >> $logfile
-python setup.py install >> $logfile
+python setup.py build &>> $logfile
+python setup.py install &>> $logfile
 error_check 'Yara install'
 
 ##Pydeep
@@ -190,40 +190,40 @@ cd $dir/tools/
 #make 
 #make install
 #pip install pydeep
-sudo -H pip install git+https://github.com/kbandla/pydeep.git >> $logfile
+sudo -H pip install git+https://github.com/kbandla/pydeep.git &>> $logfile
 error_check 'Pydeep install'
 
 ##Malheur
 print_status "${YELLOW}Setting up Malheur${NC}"
 cd $dir/tools/
-git clone https://github.com/rieck/malheur.git >> $logfile
+git clone https://github.com/rieck/malheur.git &>> $logfile
 error_check 'Malheur download'
 cd malheur
-./bootstrap >> $logfile
-./configure --prefix=/usr >> $logfile
-make install >> $logfile
+./bootstrap &>> $logfile
+./configure --prefix=/usr &>> $logfile
+make install &>> $logfile
 error_check 'Malheur install'
 
 ##Volatility
 print_status "${YELLOW}Setting up Volatility${NC}"
 cd $dir/tools/ 
-git clone https://github.com/volatilityfoundation/volatility.git >> $logfile
+git clone https://github.com/volatilityfoundation/volatility.git &>> $logfile
 error_check 'Volatility download'
 cd volatility
-python setup.py build >> $logfile
-python setup.py install >> $logfile
+python setup.py build &>> $logfile
+python setup.py install &>> $logfile
 error_check 'Volatility install'
 
 ##Suricata
 print_status "${YELLOW}Setting up Suricata${NC}"
 mkdir /etc/suricata/rules/cuckoo.rules
-echo "alert http any any -> any any (msg:\"FILE store all\"; filestore; noalert; sid:15; rev:1;)"  | sudo tee /etc/suricata/rules/cuckoo.rules >> $logfile
+echo "alert http any any -> any any (msg:\"FILE store all\"; filestore; noalert; sid:15; rev:1;)"  | sudo tee /etc/suricata/rules/cuckoo.rules &>> $logfile
 cp $gitdir/suricata-cuckoo.yaml /etc/suricata/
 cd $dir/tools/
-git clone https://github.com/seanthegeek/etupdate >> $logfile
+git clone https://github.com/seanthegeek/etupdate &>> $logfile
 cd etupdate
 mv etupdate /usr/sbin/
-/usr/sbin/etupdate -V >> $logfile
+/usr/sbin/etupdate -V &>> $logfile
 error_check 'Suricata update and configuration'
 chown $name:$name /usr/sbin/etupdate
 chown -R $name:$name /etc/suricata/rules
@@ -232,12 +232,12 @@ crontab -u $name $gitdir/cron
 ##Other tools
 print_status "${YELLOW}Grabbing other tools${NC}"
 cd $dir/tools/
-apt-get install libboost-all-dev -y >> $logfile
-sudo -H pip install git+https://github.com/buffer/pyv8 >> $logfile
+apt-get install libboost-all-dev -y &>> $logfile
+sudo -H pip install git+https://github.com/buffer/pyv8 &>> $logfile
 error_check 'PyV8 install'
-git clone https://github.com/jpsenior/threataggregator.git >> $logfile
+git clone https://github.com/jpsenior/threataggregator.git &>> $logfile
 error_check 'Threat Aggregator'
-wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz >> $logfile
+wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz &>> $logfile
 error_check 'Volutility'
 tar -zxf v1.0*
 
