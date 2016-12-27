@@ -125,7 +125,8 @@ echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb
 ##Suricata
 add-apt-repository ppa:oisf/suricata-beta -y &>> $logfile
 ##Holding pattern for dpkg...
-print_status "${YELLOW}Waiting for dpkg process to free up...If this takes too long try running ${RED}sudo rm -f /var/lib/dpkg/lock${YELLOW} in another terminal window."
+print_status "${YELLOW}Waiting for dpkg process to free up...${NC}"
+print_status "${YELLOW}If this takes too long try running ${RED}sudo rm -f /var/lib/dpkg/lock${YELLOW} in another terminal window.${NC}"
 while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
    sleep 1
 done
