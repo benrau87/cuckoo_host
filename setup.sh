@@ -150,7 +150,7 @@ sudo -H pip uninstall clamd &>> $logfile
 print_status "${YELLOW}Setting up mongodb${NC}"
 usermod -a -G vboxusers $name
 systemctl start mongodb
-sleep 10
+sleep 5
 systemctl enable mongodb
 
 ##tcpdump permissions
