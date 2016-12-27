@@ -152,11 +152,13 @@ sudo -H pip uninstall clamd -y &>> $logfile
 error_check 'Clamd uninistall'
 
 ##Add user to vbox and enable mongodb
-print_status "${YELLOW}Setting up mongodb${NC}"
+print_status "${YELLOW}Setting up Mongodb${NC}"
 usermod -a -G vboxusers $name
-systemctl start mongodb
+systemctl start mongodb &>> $logfile
 sleep 5
-systemctl enable mongodb
+systemctl enable mongodb &>> $logfile
+systemctl daemon-reload &>> $logfile
+error_check 'Mongodb setup'
 
 ##tcpdump permissions
 setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
