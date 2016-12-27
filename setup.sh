@@ -174,6 +174,7 @@ tar -zxf v3.5.0.tar.gz &>> $logfile
 cd yara-3.5.0
 ./bootstrap.sh &>> $logfile
 ./configure --with-crypto --enable-cuckoo --enable-magic &>> $logfile
+error_check 'Yara compile'
 make &>> $logfile
 make install &>> $logfile
 make check &>> $logfile
