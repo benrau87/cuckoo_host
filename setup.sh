@@ -38,7 +38,7 @@ while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
 done
 echo
 echo -e "${RED}Installing Dependencies...Please Wait${NC}"
-apt-get -qq update && sudo apt-get upgrade -y && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y
+apt-get -qq update && sudo apt-get upgrade -y  && sudo apt-get autoremove -y
  
 apt-get -qq install autoconf automake checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libhtp1 libjpeg-dev libmagic1 libssl-dev libtool libvirt-dev mongodb-org=3.2.11 mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara suricata ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara -y
 
