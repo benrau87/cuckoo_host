@@ -47,7 +47,7 @@ function error_check
 {
 
 if [ $? -eq 0 ]; then
-	print_good "$1 successfully completed."
+	print_good "$1 successfully."
 else
 	print_error "$1 failed. Please check $logfile for more details."
 exit 1
