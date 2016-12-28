@@ -249,7 +249,7 @@ tar -zxf v1.0*
 
 ##Cuckoo
 cd /etc/
-rm -rf /etc/cuckoo-modfied
+rm -rf cuckoo-modified
 print_status "${YELLOW}Downloading Cuckoo${NC}"
 git clone https://github.com/spender-sandbox/cuckoo-modified.git  &>> $logfile
 error_check 'Cuckoo downloaded'
