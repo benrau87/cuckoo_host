@@ -97,7 +97,7 @@ fi
 ##Cuckoo user account
 echo -e "${YELLOW}What would you like your Cuckoo username to be?${NC}"
 read name
-adduser $name
+adduser $name --gecos ""
 
 ##Add startup script to cuckoo users home folder
 chmod +x start_cuckoo.sh
