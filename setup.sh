@@ -177,12 +177,13 @@ print_status "${YELLOW}Downloading Yara${NC}"
 git clone https://github.com/VirusTotal/yara.git &>> $logfile
 error_check 'Yara downloaded'
 #tar -zxf v3.5.0.tar.gz &>> $logfile
-print_status "${YELLOW}Installing Yara${NC}"
+print_status "${YELLOW}Building Yara${NC}"
 #cd yara-3.5.0
 cd yara/
 ./bootstrap.sh &>> $logfile
 ./configure --with-crypto --enable-cuckoo --enable-magic &>> $logfile
 error_check 'Yara compiled'
+print_status "${YELLOW}Installing Yara${NC}"
 make &>> $logfile
 make install &>> $logfile
 make check &>> $logfile
