@@ -341,6 +341,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
 echo
 apt-get -qq install iptables-persistent -y &>> $logfile
+error_check 'Persistent Iptable entries'
 fi
 echo
 read -p "Would you like to create VMs at this time? Y/N" -n 1 -r
