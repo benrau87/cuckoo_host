@@ -102,9 +102,11 @@ adduser $name
 ##Add startup script to cuckoo users home folder
 chmod +x start_cuckoo.sh
 chown $name:$name start_cuckoo.sh
+cd $gitdir
 mv start_cuckoo.sh /home/$name/
 
 ##Start mongodb 
+chmod 755 mongodb.service
 cp mongodb.service /etc/systemd/system/
 
 ##Create directories for later
@@ -169,6 +171,7 @@ error_check 'Mongodb setup'
 setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 
 ##Yara
+cd /home/$name/tools/
 print_status "${YELLOW}Downloading Yara${NC}"
 #wget https://github.com/VirusTotal/yara/archive/v3.5.0.tar.gz &>> $logfile
 git clone https://github.com/VirusTotal/yara.git &>> $logfile
@@ -186,8 +189,8 @@ make check &>> $logfile
 error_check 'Yara installed'
 
 ##Pydeep
+cd /home/$name/tools/
 print_status "${YELLOW}Setting up Pydeep${NC}"
-cd $dir/tools/
 #wget http://sourceforge.net/projects/ssdeep/files/ssdeep-2.13/ssdeep-2.13.tar.gz/download -O ssdeep-2.13.tar.gz
 #tar -zxf ssdeep-2.13.tar.gz
 #cd ssdeep-2.13
@@ -196,11 +199,11 @@ cd $dir/tools/
 #make install
 #pip install pydeep
 sudo -H pip install git+https://github.com/kbandla/pydeep.git &>> $logfile
-error_check 'Pydeep installeded'
+error_check 'Pydeep installed'
 
 ##Malheur
+cd /home/$name/tools/
 print_status "${YELLOW}Setting up Malheur${NC}"
-cd $dir/tools/
 git clone https://github.com/rieck/malheur.git &>> $logfile
 error_check 'Malheur downloaded'
 cd malheur
@@ -210,8 +213,8 @@ make install &>> $logfile
 error_check 'Malheur installed'
 
 ##Volatility
+cd /home/$name/tools/
 print_status "${YELLOW}Setting up Volatility${NC}"
-cd $dir/tools/ 
 git clone https://github.com/volatilityfoundation/volatility.git &>> $logfile
 error_check 'Volatility downloaded'
 cd volatility
@@ -220,11 +223,12 @@ python setup.py install &>> $logfile
 error_check 'Volatility installed'
 
 ##Suricata
+cd /home/$name/tools/
 print_status "${YELLOW}Setting up Suricata${NC}"
-dir_check /etc/suricata/rules/cuckoo.rules
+#dir_check /etc/suricata/rules/cuckoo.rules
+touch /etc/suricata/rules/cuckoo.rules &>> $logfile
 echo "alert http any any -> any any (msg:\"FILE store all\"; filestore; noalert; sid:15; rev:1;)"  | sudo tee /etc/suricata/rules/cuckoo.rules &>> $logfile
 cp $gitdir/suricata-cuckoo.yaml /etc/suricata/
-cd $dir/tools/
 git clone https://github.com/seanthegeek/etupdate &>> $logfile
 cd etupdate
 mv etupdate /usr/sbin/
@@ -232,20 +236,20 @@ mv etupdate /usr/sbin/
 error_check 'Suricata updateded'
 chown $name:$name /usr/sbin/etupdate &>> $logfile
 chown -R $name:$name /etc/suricata/rules &>> $logfile
-crontab -u $name $gitdir/cron &>> $logfile
+crontab -u $name $gitdir/cron 
 error_check 'Suricata configured for auto-update'
 
 ##Other tools
+cd /home/$name/tools/
 print_status "${YELLOW}Grabbing other tools${NC}"
-cd $dir/tools/
 apt-get install libboost-all-dev -y &>> $logfile
 sudo -H pip install git+https://github.com/buffer/pyv8 &>> $logfile
 error_check 'PyV8 installed'
-git clone https://github.com/jpsenior/threataggregator.git &>> $logfile
-error_check 'Threat Aggregator downloaded'
-wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz &>> $logfile
-error_check 'Volutility downloaded'
-tar -zxf v1.0*
+#git clone https://github.com/jpsenior/threataggregator.git &>> $logfile
+#error_check 'Threat Aggregator downloaded'
+#wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz &>> $logfile
+#error_check 'Volutility downloaded'
+#tar -zxf v1.0*
 
 ##Cuckoo
 cd /etc/
@@ -284,7 +288,7 @@ cp *.conf /etc/cuckoo-modified/conf/
 chmod +x vmcloak.sh
 cp vmcloak.sh $dir/
 ##Add windows python and PIL installers for VMs
-cd $dir
+cd /home/$name/tools/
 dir_check windows_python_exe/
 cp /etc/cuckoo-modified/agent/agent.py $dir/windows_python_exe/
 cd windows_python_exe/
@@ -296,6 +300,7 @@ error_check 'Windows depos downloaded'
 ##Office Decrypt
 cd /etc/cuckoo-modified/
 dir_check work
+cd work/
 print_status "${YELLOW}Downloading Office Decrypt${NC}"
 git clone https://github.com/herumi/cybozulib &>> $logfile
 git clone https://github.com/herumi/msoffice &>> $logfile
