@@ -221,7 +221,7 @@ error_check 'Volatility installed'
 
 ##Suricata
 print_status "${YELLOW}Setting up Suricata${NC}"
-mkdir /etc/suricata/rules/cuckoo.rules
+dir_check /etc/suricata/rules/cuckoo.rules
 echo "alert http any any -> any any (msg:\"FILE store all\"; filestore; noalert; sid:15; rev:1;)"  | sudo tee /etc/suricata/rules/cuckoo.rules &>> $logfile
 cp $gitdir/suricata-cuckoo.yaml /etc/suricata/
 cd $dir/tools/
