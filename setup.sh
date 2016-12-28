@@ -154,7 +154,7 @@ error_check 'PIP requirements installation'
 
 print_status "${YELLOW}Uninstalling Clamd if needed${NC}"
 sudo -H pip uninstall clamd -y &>> $logfile
-error_check 'Clamd uninistall'
+error_check 'Clamd uninistalled'
 
 ##Add user to vbox and enable mongodb
 print_status "${YELLOW}Setting up Mongodb${NC}"
@@ -172,18 +172,18 @@ setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 print_status "${YELLOW}Downloading Yara${NC}"
 #wget https://github.com/VirusTotal/yara/archive/v3.5.0.tar.gz &>> $logfile
 git clone https://github.com/VirusTotal/yara.git &>> $logfile
-error_check 'Yara download'
+error_check 'Yara downloaded'
 #tar -zxf v3.5.0.tar.gz &>> $logfile
 print_status "${YELLOW}Installing Yara${NC}"
 #cd yara-3.5.0
 cd yara/
 ./bootstrap.sh &>> $logfile
 ./configure --with-crypto --enable-cuckoo --enable-magic &>> $logfile
-error_check 'Yara compile'
+error_check 'Yara compiled'
 make &>> $logfile
 make install &>> $logfile
 make check &>> $logfile
-error_check 'Yara install'
+error_check 'Yara installed'
 
 ##Pydeep
 print_status "${YELLOW}Setting up Pydeep${NC}"
@@ -196,28 +196,28 @@ cd $dir/tools/
 #make install
 #pip install pydeep
 sudo -H pip install git+https://github.com/kbandla/pydeep.git &>> $logfile
-error_check 'Pydeep install'
+error_check 'Pydeep installeded'
 
 ##Malheur
 print_status "${YELLOW}Setting up Malheur${NC}"
 cd $dir/tools/
 git clone https://github.com/rieck/malheur.git &>> $logfile
-error_check 'Malheur download'
+error_check 'Malheur downloaded'
 cd malheur
 ./bootstrap &>> $logfile
 ./configure --prefix=/usr &>> $logfile
 make install &>> $logfile
-error_check 'Malheur install'
+error_check 'Malheur installed'
 
 ##Volatility
 print_status "${YELLOW}Setting up Volatility${NC}"
 cd $dir/tools/ 
 git clone https://github.com/volatilityfoundation/volatility.git &>> $logfile
-error_check 'Volatility download'
+error_check 'Volatility downloaded'
 cd volatility
 python setup.py build &>> $logfile
 python setup.py install &>> $logfile
-error_check 'Volatility install'
+error_check 'Volatility installed'
 
 ##Suricata
 print_status "${YELLOW}Setting up Suricata${NC}"
@@ -229,7 +229,7 @@ git clone https://github.com/seanthegeek/etupdate &>> $logfile
 cd etupdate
 mv etupdate /usr/sbin/
 /usr/sbin/etupdate -V &>> $logfile
-error_check 'Suricata updated'
+error_check 'Suricata updateded'
 chown $name:$name /usr/sbin/etupdate &>> $logfile
 chown -R $name:$name /etc/suricata/rules &>> $logfile
 crontab -u $name $gitdir/cron &>> $logfile
@@ -240,22 +240,22 @@ print_status "${YELLOW}Grabbing other tools${NC}"
 cd $dir/tools/
 apt-get install libboost-all-dev -y &>> $logfile
 sudo -H pip install git+https://github.com/buffer/pyv8 &>> $logfile
-error_check 'PyV8 install'
+error_check 'PyV8 installed'
 git clone https://github.com/jpsenior/threataggregator.git &>> $logfile
-error_check 'Threat Aggregator download'
+error_check 'Threat Aggregator downloaded'
 wget https://github.com/kevthehermit/VolUtility/archive/v1.0.tar.gz &>> $logfile
-error_check 'Volutility download'
+error_check 'Volutility downloaded'
 tar -zxf v1.0*
 
 ##Cuckoo
 cd /etc/
 print_status "${YELLOW}Downloading Cuckoo${NC}"
 git clone https://github.com/spender-sandbox/cuckoo-modified.git  &>> $logfile
-error_check 'Cuckoo download'
+error_check 'Cuckoo downloaded'
 cd cuckoo-modified/
 print_status "${YELLOW}Downloading Java tools${NC}"
 wget https://bitbucket.org/mstrobel/procyon/downloads/procyon-decompiler-0.5.30.jar  &>> $logfile
-error_check 'Java tools download'
+error_check 'Java tools downloaded'
 ##Can probably remove one of the requirements.txt docs at some point
 print_status "${YELLOW}Installing any dependencies that may have been missed...Please wait${NC}"
 sudo -H pip install -r requirements.txt &>> $logfile
@@ -263,7 +263,7 @@ sudo -H pip install django-ratelimit &>> $logfile
 error_check 'Cuckoo dependencies'
 cd utils/
 python comm* --all --force &>> $logfile
-error_check 'Community signature update'
+error_check 'Community signature updated'
 cd ..
 cd data/yara/
 print_status "${YELLOW}Downloading Yara Rules...Please wait${NC}"
@@ -290,7 +290,7 @@ cd windows_python_exe/
 print_status "${YELLOW}Downloading Windows Python Depos${NC}"
 wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe &>> $logfile
 wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi &>> $logfile
-error_check 'Windows depos download'
+error_check 'Windows depos downloaded'
 
 ##Office Decrypt
 cd /etc/cuckoo-modified/
@@ -300,7 +300,7 @@ git clone https://github.com/herumi/cybozulib &>> $logfile
 git clone https://github.com/herumi/msoffice &>> $logfile
 cd msoffice
 make -j RELEASE=1 &>> $logfile
-error_check 'Office decrypt install'
+error_check 'Office decrypt installed'
 
 ##Change ownership for folder that have been created
 chown -R $name:$name /home/$name/*
