@@ -284,7 +284,7 @@ chmod +x vmcloak.sh
 cp vmcloak.sh $dir/
 ##Add windows python and PIL installers for VMs
 cd $dir
-mkdir windows_python_exe/
+dir_check windows_python_exe/
 cp /etc/cuckoo-modified/agent/agent.py $dir/windows_python_exe/
 cd windows_python_exe/
 print_status "${YELLOW}Downloading Windows Python Depos${NC}"
