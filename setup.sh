@@ -360,16 +360,16 @@ echo
 read -p "Would you like to use a SQL database to support multi-threaded analysis? Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-print_status "Downloading and setting up MySQL"
+print_status "Setting ENV variables"
 export DEBIAN_FRONTEND="noninteractive"
 debconf-set-selections <<< "mysql-server mysql-server/$root_mysql_pass password root"
 debconf-set-selections <<< "mysql-server mysql-server/$root_mysql_pass password root"
+error_check 'MySQL passwords set'
+print_status "Downloading and installing MySQL"
 apt-get -y install mysql-server
 error_check 'MySQL installed'
-#sudo -E apt-get -q -y install mysql-server python-mysqldb
-#apt-get install mariadb-server mariadb-client python-mysqldb -y &>> $logfile
-mysqladmin -uroot password $root_mysql_pass &>> $logfile
-error_check 'MySQL root password change'	
+#mysqladmin -uroot password $root_mysql_pass &>> $logfile
+#error_check 'MySQL root password change'	
 mysql -uroot -p$root_mysql_pass -e "DELETE FROM mysql.user WHERE User=''; DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1'); DROP DATABASE IF EXISTS test; DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'; DROP DATABASE IF EXISTS cuckoo; CREATE DATABASE cuckoo; GRANT ALL PRIVILEGES ON cuckoo.* TO 'cuckoo'@'localhost' IDENTIFIED BY '$cuckoo_mysql_pass'; FLUSH PRIVILEGES;" &>> $logfile
 error_check 'MySQL secure installation and cuckoo database/user creation'
 replace "connection =" "connection = mysql://cuckoo:$cuckoo_mysql_pass@localhost/cuckoo" -- /etc/cuckoo-modified/conf/cuckoo.conf &>> $logfile
