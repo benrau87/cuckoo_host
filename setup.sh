@@ -1,4 +1,10 @@
 #!/bin/bash
+
+###Change these as needed and save them securely somewhere!########################################################
+root_mysql_pass='w4ndZrsM2H_K4FjqSaog4_jWg'
+cuckoo_mysql_pass='DuZXb7K7cldzU5DS5Q5lVzaay'
+
+####################################################################################################################
 if [ "$EUID" -ne 0 ]
   then echo "Please run as root"
   exit 1
@@ -8,18 +14,14 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 gitdir=$PWD
 
-# Logging setup. Ganked this entirely from stack overflow. Uses FIFO/pipe magic to log all the output of the script to a file. Also capable of accepting redirects/appends to the file for logging compiler stuff (configure, make and make install) to a log file instead of losing it on a screen buffer. This gives the user cleaner output, while logging everything in the background, for troubleshooting, analysis, or sending it to me for help.
-
+##Logging setup
 logfile=/var/log/cuckoo_install.log
 mkfifo ${logfile}.pipe
 tee < ${logfile}.pipe $logfile &
 exec &> ${logfile}.pipe
 rm ${logfile}.pipe
 
-#Functions, functions everywhere.
-########################################
-#metasploit-like print statements. Gratuitously ganked from  Darkoperator's metasploit install script. status messages, error messages, good status returns. I added in a notification print for areas users should definitely pay attention to.
-
+##Functions
 function print_status ()
 {
     echo -e "\x1B[01;34m[*]\x1B[0m $1"
@@ -40,9 +42,6 @@ function print_notification ()
 	echo -e "\x1B[01;33m[*]\x1B[0m $1"
 }
 
-########################################
-#Script does a lot of error checking. Decided to insert an error check function. If a task performed returns a non zero status code, something very likely went wrong.
-
 function error_check
 {
 
@@ -55,9 +54,6 @@ fi
 
 }
 
-########################################
-#Package installation function.
-
 function install_packages()
 {
 
@@ -65,9 +61,6 @@ apt-get update &>> $logfile && apt-get install -y --allow-unauthenticated ${@} &
 error_check 'Package installation'
 
 }
-
-########################################
-#This script creates a lot of directories by default. This is a function that checks if a directory already exists and if it doesn't creates the directory (including parent dirs if they're missing).
 
 function dir_check()
 {
@@ -192,13 +185,6 @@ error_check 'Yara installed'
 ##Pydeep
 cd /home/$name/tools/
 print_status "${YELLOW}Setting up Pydeep${NC}"
-#wget http://sourceforge.net/projects/ssdeep/files/ssdeep-2.13/ssdeep-2.13.tar.gz/download -O ssdeep-2.13.tar.gz
-#tar -zxf ssdeep-2.13.tar.gz
-#cd ssdeep-2.13
-#./configure
-#make 
-#make install
-#pip install pydeep
 sudo -H pip install git+https://github.com/kbandla/pydeep.git &>> $logfile
 error_check 'Pydeep installed'
 
@@ -280,24 +266,6 @@ mv /etc/cuckoo-modified/data/yara/binaries/Android* /etc/cuckoo-modified/data/ya
 rm /etc/cuckoo-modified/data/yara/binaries/vmdetect.yar  &>> $logfile
 rm /etc/cuckoo-modified/data/yara/binaries/antidebug_antivm.yar  &>> $logfile
 error_check 'Adding Yara rules'
-
-
-##Copy over conf files
-cd $gitdir/
-cp *.conf /etc/cuckoo-modified/conf/
-##Add vmcloak scripts 
-chmod +x vmcloak.sh
-cp vmcloak.sh $dir/
-##Add windows python and PIL installers for VMs
-cd /home/$name/tools/
-dir_check windows_python_exe/
-cp /etc/cuckoo-modified/agent/agent.py $dir/windows_python_exe/
-cd windows_python_exe/
-print_status "${YELLOW}Downloading Windows Python Depos${NC}"
-wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe &>> $logfile
-wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi &>> $logfile
-error_check 'Windows depos downloaded'
-
 ##Office Decrypt
 cd /etc/cuckoo-modified/
 dir_check work
@@ -308,6 +276,36 @@ git clone https://github.com/herumi/msoffice &>> $logfile
 cd msoffice
 make -j RELEASE=1 &>> $logfile
 error_check 'Office decrypt installed'
+
+########################################
+#setting up mariadb user, database and table structure
+
+print_status "Setting up MySQL"
+apt-get install mysql-server python-mysqldb -y &>> $logfile
+mysqladmin -uroot password $root_mysql_pass &>> $logfile
+error_check 'MySQL root password change'
+	
+mysql -uroot -p$root_mysql_pass -e "DELETE FROM mysql.user WHERE User=''; DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1'); DROP DATABASE IF EXISTS test; DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'; DROP DATABASE IF EXISTS cuckoo; CREATE DATABASE cuckoo; GRANT ALL PRIVILEGES ON cuckoo.* TO 'cuckoo'@'localhost' IDENTIFIED BY '$cuckoo_mysql_pass'; FLUSH PRIVILEGES;" &>> $logfile
+
+error_check 'mysql_secure_installation and cuckoo database/user creation'
+
+##Copy over conf files
+cd $gitdir/
+cp *.conf /etc/cuckoo-modified/conf/
+
+##Add vmcloak scripts 
+chmod +x vmcloak.sh
+cp vmcloak.sh $dir/
+
+##Add windows python and PIL installers for VMs
+cd /home/$name/tools/
+dir_check windows_python_exe/
+cp /etc/cuckoo-modified/agent/agent.py $dir/windows_python_exe/
+cd windows_python_exe/
+print_status "${YELLOW}Downloading Windows Python Depos${NC}"
+wget http://effbot.org/downloads/PIL-1.1.7.win32-py2.7.exe &>> $logfile
+wget https://www.python.org/ftp/python/2.7.11/python-2.7.11.msi &>> $logfile
+error_check 'Windows depos downloaded'
 
 ##Change ownership for folder that have been created
 chown -R $name:$name /home/$name/*
