@@ -361,12 +361,12 @@ read -p "Would you like to use a SQL database to support multi-threaded analysis
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 print_status "Setting up MySQL"
-apt-get install mysql-server python-mysqldb -y &>> $logfile
+apt-get install mariadb-server mariadb-client python-mysqldb -y &>> $logfile
 mysqladmin -uroot password $root_mysql_pass &>> $logfile
 error_check 'MySQL root password change'	
 mysql -uroot -p$root_mysql_pass -e "DELETE FROM mysql.user WHERE User=''; DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1'); DROP DATABASE IF EXISTS test; DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'; DROP DATABASE IF EXISTS cuckoo; CREATE DATABASE cuckoo; GRANT ALL PRIVILEGES ON cuckoo.* TO 'cuckoo'@'localhost' IDENTIFIED BY '$cuckoo_mysql_pass'; FLUSH PRIVILEGES;" &>> $logfile
 error_check 'mysql_secure_installation and cuckoo database/user creation'
-sed -i -e 's/connection =/|connection = mysql://cuckoo:$cuckoo_mysql_pass@localhost/cuckoo|/g' /etc/cuckoo-modified/conf/cuckoo.conf
+replace "connection =" "connection = mysql://cuckoo:$cuckoo_mysql_pass@localhost/cuckoo" -- /etc/cuckoo-modified/conf/cuckoo.conf
 error_check 'Configuration files modified'
 fi
 
