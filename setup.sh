@@ -361,7 +361,11 @@ read -p "Would you like to use a SQL database to support multi-threaded analysis
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 print_status "Downloading and setting up MySQL"
-sudo -E apt-get -q -y install mysql-server python-mysqldb
+debconf-set-selections <<< 'mysql-server mysql-server/root_password password your_password'
+debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password your_password'
+apt-get -y install mysql-server
+error_check 'MySQL installed'
+#sudo -E apt-get -q -y install mysql-server python-mysqldb
 #apt-get install mariadb-server mariadb-client python-mysqldb -y &>> $logfile
 mysqladmin -uroot password $root_mysql_pass &>> $logfile
 error_check 'MySQL root password change'	
