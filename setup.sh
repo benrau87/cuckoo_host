@@ -362,8 +362,8 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
 print_status "Downloading and setting up MySQL"
 export DEBIAN_FRONTEND="noninteractive"
-debconf-set-selections <<< "mysql-server mysql-server/$root_mysql_pass"
-debconf-set-selections <<< "mysql-server mysql-server/$root_mysql_pass"
+debconf-set-selections <<< "mysql-server mysql-server/$root_mysql_pass root"
+debconf-set-selections <<< "mysql-server mysql-server/$root_mysql_pass root"
 apt-get -y install mysql-server
 error_check 'MySQL installed'
 #sudo -E apt-get -q -y install mysql-server python-mysqldb
