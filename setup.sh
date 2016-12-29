@@ -1,6 +1,6 @@
 #!/bin/bash
 
-###Change these as needed and save them securely somewhere!########################################################
+###Change these as needed and save them securely somewhere! Only needed if you plan on using MySQL##################
 root_mysql_pass='w4ndZrsM2H_K4FjqSaog4_jWg'
 cuckoo_mysql_pass='DuZXb7K7cldzU5DS5Q5lVzaay'
 
@@ -277,18 +277,6 @@ cd msoffice
 make -j RELEASE=1 &>> $logfile
 error_check 'Office decrypt installed'
 
-########################################
-#setting up mariadb user, database and table structure
-
-print_status "Setting up MySQL"
-apt-get install mysql-server python-mysqldb -y &>> $logfile
-mysqladmin -uroot password $root_mysql_pass &>> $logfile
-error_check 'MySQL root password change'
-	
-mysql -uroot -p$root_mysql_pass -e "DELETE FROM mysql.user WHERE User=''; DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1'); DROP DATABASE IF EXISTS test; DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'; DROP DATABASE IF EXISTS cuckoo; CREATE DATABASE cuckoo; GRANT ALL PRIVILEGES ON cuckoo.* TO 'cuckoo'@'localhost' IDENTIFIED BY '$cuckoo_mysql_pass'; FLUSH PRIVILEGES;" &>> $logfile
-
-error_check 'mysql_secure_installation and cuckoo database/user creation'
-
 ##Copy over conf files
 cd $gitdir/
 cp *.conf /etc/cuckoo-modified/conf/
@@ -363,6 +351,19 @@ then
 echo
 bash $gitdir/nginx.sh
 fi
+echo
+read -p "Would you like to use a SQL database to support threaded analysis? Y/N" -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+print_status "Setting up MySQL"
+apt-get install mysql-server python-mysqldb -y &>> $logfile
+mysqladmin -uroot password $root_mysql_pass &>> $logfile
+error_check 'MySQL root password change'	
+mysql -uroot -p$root_mysql_pass -e "DELETE FROM mysql.user WHERE User=''; DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1'); DROP DATABASE IF EXISTS test; DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'; DROP DATABASE IF EXISTS cuckoo; CREATE DATABASE cuckoo; GRANT ALL PRIVILEGES ON cuckoo.* TO 'cuckoo'@'localhost' IDENTIFIED BY '$cuckoo_mysql_pass'; FLUSH PRIVILEGES;" &>> $logfile
+error_check 'mysql_secure_installation and cuckoo database/user creation'
+
+fi
+
 echo -e "${YELLOW}Installation complete, login as $name and open the terminal. In $name home folder you will find the start_cuckoo script. To get started as fast as possible you will need to create a virtualbox vm and name it ${RED}cuckoo1${NC}.${YELLOW} On the Windows VM install the windows_exes that can be found under the tools folder. Name the snapshot ${RED}vmcloak${YELLOW}. Alternatively you can create the VM with the vmcloak.sh script provided in your home directory. This will require you have a local copy of the Windows ISO you wish to use. You can then launch cuckoo_start.sh and navigate to $HOSTNAME:8000 or https://$HOSTNAME if Nginx was installed.${NC}"
 
 exit 0
