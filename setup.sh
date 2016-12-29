@@ -321,7 +321,8 @@ done
 sudo -H pip install distorm3 &>> $logfile
 ##RANT OVER
 wait 1 &>> $logfile
-echo
+
+###Extras Extras!
 read -p "Do you want to iptable changes persistent? Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
@@ -330,13 +331,15 @@ apt-get -qq install iptables-persistent -y &>> $logfile
 error_check 'Persistent Iptable entries'
 fi
 echo
-read -p "Would you like to create VMs at this time? Y/N" -n 1 -r
+
+read -p "Would you like to create VMs at this time? You will need a local Windows ISO to proceed. Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 echo
 bash $dir/vmcloak.sh
 fi
 echo
+
 read -p "Would you like to harden this host from malware Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
@@ -345,6 +348,7 @@ apt-get install -qq unattended-upgrades apt-listchanges fail2ban -y  &>> $logfil
 error_check 'Security upgrades'
 fi
 echo
+
 read -p "Would you like secure the Cuckoo webserver with SSL? Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
@@ -352,7 +356,8 @@ echo
 bash $gitdir/nginx.sh
 fi
 echo
-read -p "Would you like to use a SQL database to support threaded analysis? Y/N" -n 1 -r
+
+read -p "Would you like to use a SQL database to support multi-threaded analysis? Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 print_status "Setting up MySQL"
@@ -361,7 +366,8 @@ mysqladmin -uroot password $root_mysql_pass &>> $logfile
 error_check 'MySQL root password change'	
 mysql -uroot -p$root_mysql_pass -e "DELETE FROM mysql.user WHERE User=''; DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1'); DROP DATABASE IF EXISTS test; DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'; DROP DATABASE IF EXISTS cuckoo; CREATE DATABASE cuckoo; GRANT ALL PRIVILEGES ON cuckoo.* TO 'cuckoo'@'localhost' IDENTIFIED BY '$cuckoo_mysql_pass'; FLUSH PRIVILEGES;" &>> $logfile
 error_check 'mysql_secure_installation and cuckoo database/user creation'
-sed -i -e 's/connection =/|connection = mysql://cuckoo:$cuckoo_mysql_pass@localhost/cuckoo|/g'
+sed -i -e 's/connection =/|connection = mysql://cuckoo:$cuckoo_mysql_pass@localhost/cuckoo|/g' /etc/cuckoo-modified/conf/cuckoo.conf
+error_check 'Configuration files modified'
 fi
 
 echo -e "${YELLOW}Installation complete, login as $name and open the terminal. In $name home folder you will find the start_cuckoo script. To get started as fast as possible you will need to create a virtualbox vm and name it ${RED}cuckoo1${NC}.${YELLOW} On the Windows VM install the windows_exes that can be found under the tools folder. Name the snapshot ${RED}vmcloak${YELLOW}. Alternatively you can create the VM with the vmcloak.sh script provided in your home directory. This will require you have a local copy of the Windows ISO you wish to use. You can then launch cuckoo_start.sh and navigate to $HOSTNAME:8000 or https://$HOSTNAME if Nginx was installed.${NC}"
