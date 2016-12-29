@@ -361,8 +361,9 @@ read -p "Would you like to use a SQL database to support multi-threaded analysis
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 print_status "Downloading and setting up MySQL"
-debconf-set-selections <<< 'mysql-server mysql-server/$root_mysql_pass $cuckoo_mysql_pass'
-debconf-set-selections <<< 'mysql-server mysql-server/$root_mysql_pass $cuckoo_mysql_pass'
+export DEBIAN_FRONTEND="noninteractive"
+debconf-set-selections <<< "mysql-server mysql-server/$root_mysql_pass"
+debconf-set-selections <<< "mysql-server mysql-server/$root_mysql_pass"
 apt-get -y install mysql-server
 error_check 'MySQL installed'
 #sudo -E apt-get -q -y install mysql-server python-mysqldb
