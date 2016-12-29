@@ -138,6 +138,7 @@ chmod u=rw,g=r,o= /etc/nginx/htpasswd
 
 ##Create and restart service
 systemctl enable nginx.service
+update-rc.d nginx defaults
 service nginx restart
 
 
