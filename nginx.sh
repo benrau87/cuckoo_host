@@ -8,7 +8,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m'
 
 echo
-echo -e "${YELLOW}Please enter the name of the cuckoo user account${NC}"
+echo -e "${YELLOW}What is the name of the user account created for your cuckoo instance?${NC}"
 read user
 echo
 echo -e "${YELLOW}What is the IP address of the machine that is hosting the cuckoo webpage?${NC}"
