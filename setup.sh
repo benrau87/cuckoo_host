@@ -366,7 +366,7 @@ debconf-set-selections <<< "mysql-server mysql-server/$root_mysql_pass password 
 debconf-set-selections <<< "mysql-server mysql-server/$root_mysql_pass password root"
 error_check 'MySQL passwords set'
 print_status "Downloading and installing MySQL"
-apt-get -y install mysql-server &>> $logfile
+apt-get -y install mysql-server python-mysqldb &>> $logfile
 error_check 'MySQL installed'
 #mysqladmin -uroot password $root_mysql_pass &>> $logfile
 #error_check 'MySQL root password change'	
