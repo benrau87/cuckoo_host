@@ -88,7 +88,7 @@ else
 fi
 
 ##Cuckoo user account
-echo -e "${YELLOW}What would you like your Cuckoo username to be?${NC}"
+echo -e "${YELLOW}We need to create a local account to run your Cuckoo sandbox from; What would you like your Cuckoo account username to be?${NC}"
 read name
 adduser $name --gecos ""
 
