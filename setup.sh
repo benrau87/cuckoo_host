@@ -58,7 +58,7 @@ function install_packages()
 {
 
 apt-get update &>> $logfile && apt-get install -y --allow-unauthenticated ${@} &>> $logfile
-error_check 'Package installation'
+error_check 'Package installation completed'
 
 }
 
@@ -142,7 +142,7 @@ install_packages ${packages[@]}
  
 print_status "${YELLOW}Upgrading PIP${NC}"
 sudo -H pip install --upgrade pip &>> $logfile
-error_check 'PIP upgrade'
+error_check 'PIP upgraded'
 
 print_status "${YELLOW}Installing PIP requirements${NC}"
 sudo -H pip install -r $gitdir/requirements.txt &>> $logfile
