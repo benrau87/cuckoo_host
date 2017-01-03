@@ -324,7 +324,7 @@ sudo -H pip install distorm3 &>> $logfile
 wait 1 &>> $logfile
 
 ###Extras Extras!
-read -p "Do you want to iptable changes persistent? Y/N" -n 1 -r
+read -p "Do you want to iptable changes persistent so that ? Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 echo
