@@ -317,7 +317,7 @@ while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
    sleep 1
 done
 ##DAMN THING NEVER INSTALLS!!!!!!
-sudo -H pip install distorm3 &>> $logfile
+sudo -H pip install distorm3 re2 &>> $logfile
 ##RANT OVER
 wait 1 &>> $logfile
 
