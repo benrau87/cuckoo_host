@@ -5,7 +5,7 @@ NC='\033[0m'
 
 ON=$(ifconfig -a | grep -cs 'vboxnet*')
 
-if [[ $ON => 1 ]]
+if [[ $ON -ge 1 ]]
 then
   echo "Host only interface is available"
 else 
