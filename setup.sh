@@ -116,9 +116,9 @@ export DEBIAN_FRONTEND=noninteractive
 echo
 print_status "${YELLOW}Adding Repositories...Please Wait${NC}"
 #Mongodb
-#apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 &>> $logfile
-#echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list &>> $logfile
-#error_check 'Mongodb added'
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 &>> $logfile
+echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list &>> $logfile
+error_check 'Mongodb added'
 ##Suricata
 add-apt-repository ppa:oisf/suricata-beta -y &>> $logfile
 error_check 'Suricata added'
@@ -138,7 +138,7 @@ error_check 'Updated system'
 print_status "${YELLOW}Installing:${NC} autoconf automake bison checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool flex geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libhtp1 libjpeg-dev libjansson-dev libmagic1 libmagic-dev libssl-dev libtool libvirt-dev mongodb mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara suricata ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara .."
 
 #mongodb-org=3.2.11
-declare -a packages=(autoconf automake bison checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool flex geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libhtp1 libjpeg-dev libjansson-dev libmagic1 libmagic-dev libssl-dev libtool libvirt-dev mongodb mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara suricata ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara);
+declare -a packages=(autoconf automake bison checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool flex geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libhtp1 libjpeg-dev libjansson-dev libmagic1 libmagic-dev libssl-dev libtool libvirt-dev mongodb-org mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara suricata ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara);
 install_packages ${packages[@]}
  
 print_status "${YELLOW}Upgrading PIP${NC}"
