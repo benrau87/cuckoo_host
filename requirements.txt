@@ -50,7 +50,6 @@ python-magic==0.4.6
 pythonaes==1.0
 pytz==2016.7
 rarfile==2.8
-re2
 requests==2.7.0
 setuptools==20.7.0
 six==1.9.0
