@@ -35,7 +35,6 @@ oletools==0.42
 openpyxl==2.4.1
 peepdf==0.3.2
 pefile2==1.2.11
-re2==0.2.22
 Pillow==3.2.0
 pyasn1==0.1.8
 pycparser==2.14
@@ -51,6 +50,7 @@ python-magic==0.4.6
 pythonaes==1.0
 pytz==2016.7
 rarfile==2.8
+re2
 requests==2.7.0
 setuptools==20.7.0
 six==1.9.0
