@@ -7,7 +7,7 @@ Usage:
 
 2) Follow prompts to create a local Cuckoo user
 
-3) If you have a locally available Windows ISO, you can create the VM at the end of the script. Or anytime afterwards with the vmcloak.sh script provided at the home directory of the user you created in step 2.
+3) If you have a locally available Windows ISO, you can create the VM at the end of the script. Or anytime afterwards with the vmcloak.sh script provided at the home directory of the user you created in step 2. You can use MySql as you database if you are running a larger deployment. If you chose to, you should change the keys in the setup.sh script BEFORE you run the inital setup.
 
 4) When installation is complete you should switch accounts to the one created in step 2.
 
@@ -20,4 +20,4 @@ Usage:
 8) Run the start_cuckoo.sh script and navigate to http://localhost:8000 or https://youripaddress if you ran the nginx script.
 
 ***Note***
-You must install the provided agent on machine created with vmcloak. Start the VM and kill the running agent on port 8000, download the modified one and restart it. Take a running snapshot and proceed.
+You must install the provided agent on machine created with vmcloak. Start the VM, check (netstat -ano) and kill the included running agent on port 8000 (taskkill /F /pid #), download the modified one and start it. Take a running snapshot and proceed.
