@@ -20,4 +20,4 @@ Usage:
 8) Run the start_cuckoo.sh script and navigate to http://localhost:8000 or https://youripaddress if you ran the nginx script.
 
 ***Note***
-You must install the provided agent on machine created with vmcloak. Start the VM and kill the running agent on port 8000, download the modified one and restart it. Take a running snapshot and proceed.
+You must install the provided agent on machine created with vmcloak. Start the VM and kill the included running agent on port 8000 (taskkill /F /pid <pid>), download the modified one and start it. Take a running snapshot and proceed.
