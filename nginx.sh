@@ -13,7 +13,7 @@ read user
 echo
 
 echo
-echo -e "${YELLOW}What is the IP address of the machine that is hosting the cuckoo webpage?${NC}"
+echo -e "${YELLOW}What is the Hostname or IP address of the machine that is hosting the cuckoo webpage?${NC}"
 read ipaddr
 echo
 
