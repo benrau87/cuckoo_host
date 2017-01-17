@@ -142,7 +142,7 @@ declare -a packages=(autoconf automake bison checkinstall clamav clamav-daemon c
 install_packages ${packages[@]}
  
 print_status "${YELLOW}Upgrading PIP${NC}"
-sudo -H pip install --upgrade pip &>> $logfile
+pip install --upgrade pip &>> $logfile
 error_check 'PIP upgraded'
 
 print_status "${YELLOW}Installing PIP requirements${NC}"
