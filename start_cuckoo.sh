@@ -29,4 +29,4 @@ cd /etc/cuckoo-modified/web/
 ./manage.py migrate
 ./manage.py runserver 127.0.0.1:8000 &
 cd ..
-./cuckoo.py
+./cuckoo.py --debug
