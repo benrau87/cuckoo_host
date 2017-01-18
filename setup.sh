@@ -344,7 +344,7 @@ sudo -H pip uninstall clamd -y &>> $logfile
 error_check 'Clamd uninistalled'
 
 ###Extras Extras!
-read -p "Do you want to iptable changes persistent so that ? Y/N" -n 1 -r
+read -p "Do you want to iptable changes persistent so that forwarding routes do not need to be added at boot? Y/N" -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
 echo
