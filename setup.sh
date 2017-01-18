@@ -97,7 +97,7 @@ adduser $name --gecos ""
 chmod +x start_cuckoo.sh
 chown $name:$name start_cuckoo.sh
 cd $gitdir
-mv start_cuckoo.sh /home/$name/
+cp start_cuckoo.sh /home/$name/
 
 ##Start mongodb 
 chmod 755 mongodb.service
