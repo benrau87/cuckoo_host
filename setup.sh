@@ -156,7 +156,7 @@ error_check 'PIP upgraded'
 
 ##PIP Packages
 print_status "${YELLOW}Installing PIP requirements${NC}"
-sudo -H pip install jinja2 pymongo bottle pefile django chardet pygal m2crypto clamd django-ratelimit pycrypto weasyprint rarfile jsbeautifier python-whois bs4 &>> $logfile
+sudo -H pip install jinja2 pymongo pymysql bottle pefile django chardet pygal m2crypto clamd django-ratelimit pycrypto weasyprint rarfile jsbeautifier python-whois bs4 &>> $logfile
 pip install cybox==2.1.0.9 &>> $logfile
 pip install maec==4.1.0.11 &>> $logfile
 error_check 'PIP requirements installation'
