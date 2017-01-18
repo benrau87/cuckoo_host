@@ -144,7 +144,7 @@ declare -a packages=(python-pip oracle-java8-installer elasticsearch mongodb pyt
 install_packages ${packages[@]}
  
 print_status "${YELLOW}Upgrading PIP${NC}"
-pip install --upgrade-pip &>> $logfile
+pip install --upgrade pip &>> $logfile
 error_check 'PIP upgraded'
 
 print_status "${YELLOW}Installing PIP requirements${NC}"
