@@ -122,13 +122,14 @@ print_status "${YELLOW}Adding Repositories...Please Wait${NC}"
 
 ##Elasticsearch
 add-apt-repository ppa:webupd8team/java -y &>> $logfile
+error_check 'Java Repo added'
 wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
 add-apt-repository "deb http://packages.elasticsearch.org/elasticsearch/1.4/debian stable main" &>> $logfile
-error_check 'Elasticsearch added'
+error_check 'Elasticsearch Repo added'
 
 ##Suricata
 add-apt-repository ppa:oisf/suricata-beta -y &>> $logfile
-error_check 'Suricata added'
+error_check 'Suricata Repo added'
 
 ##Holding pattern for dpkg...
 print_status "${YELLOW}Waiting for dpkg process to free up...${NC}"
