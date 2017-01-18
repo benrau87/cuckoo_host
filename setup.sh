@@ -116,12 +116,20 @@ export DEBIAN_FRONTEND=noninteractive
 echo
 print_status "${YELLOW}Adding Repositories...Please Wait${NC}"
 #Mongodb
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 &>> $logfile
-echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list &>> $logfile
-error_check 'Mongodb added'
+#apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 &>> $logfile
+#echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list &>> $logfile
+#error_check 'Mongodb added'
+
+##Elasticsearch
+add-apt-repository ppa:webupd8team/java -y &>> $logfile
+wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
+add-apt-repository "deb http://packages.elasticsearch.org/elasticsearch/1.4/debian stable main" &>> $logfile
+error_check 'Elasticsearch added'
+
 ##Suricata
 add-apt-repository ppa:oisf/suricata-beta -y &>> $logfile
 error_check 'Suricata added'
+
 ##Holding pattern for dpkg...
 print_status "${YELLOW}Waiting for dpkg process to free up...${NC}"
 print_status "${YELLOW}If this takes too long try running ${RED}sudo rm -f /var/lib/dpkg/lock${YELLOW} in another terminal window.${NC}"
@@ -129,25 +137,53 @@ while fuser /var/lib/dpkg/lock >/dev/null 2>&1; do
    sleep 1
 done
 
+##Java install for elasticsearch
+print_status "${YELLOW}Installing Java${NC}"
+echo debconf shared/accepted-oracle-license-v1-1 select true | \
+  sudo debconf-set-selections &>> $logfile
+apt-get install oracle-java8-installer -y &>> $logfile
+error_check 'Java Installed'
+
 # System updates
 print_status "${YELLOW}Performing apt-get update and upgrade (May take a while if this is a fresh install)..${NC}"
 apt-get update &>> $logfile && apt-get -y upgrade &>> $logfile
 error_check 'Updated system'
 
 
+#mongodb-org=3.2.11
+#declare -a packages=(autoconf automake bison checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool flex geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libhtp1 libjpeg-dev libjansson-dev libmagic1 libmagic-dev libre2-dev libssl-dev libtool libvirt-dev mongodb-org mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara suricata ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara);
+#install_packages ${packages[@]}
+ 
+#print_status "${YELLOW}Upgrading PIP${NC}"
+#pip install --upgrade pip &>> $logfile
+#error_check 'PIP upgraded'
+
+#print_status "${YELLOW}Installing PIP requirements${NC}"
+#sudo -H pip install -r $gitdir/requirements.txt &>> $logfile
+#error_check 'PIP requirements installation'
+
+##Apt packages
 print_status "${YELLOW}Installing:${NC} autoconf automake bison checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool flex geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libhtp1 libjpeg-dev libjansson-dev libmagic1 libmagic-dev libre2-dev libssl-dev libtool libvirt-dev mongodb mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara suricata ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara .."
 
-#mongodb-org=3.2.11
-declare -a packages=(autoconf automake bison checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool flex geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libhtp1 libjpeg-dev libjansson-dev libmagic1 libmagic-dev libre2-dev libssl-dev libtool libvirt-dev mongodb-org mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara suricata ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara);
+declare -a packages=(autoconf autogen automake bison libfuzzy-dev libmagic-dev libconfig-dev libjansson-dev shtool python-pip oracle-java8-installer elasticsearch mongodb python python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-libvirt python-bottle python-pefile python-chardet swig libssl-dev clamav-daemon python-geoip geoip-database mono-utils wkhtmltopdf xvfb xfonts-100dpi tcpdump libtool libcap2-bin virtualbox suricata p7zip-full unzip);
 install_packages ${packages[@]}
- 
+
+##Upgrade PIP
 print_status "${YELLOW}Upgrading PIP${NC}"
 pip install --upgrade pip &>> $logfile
 error_check 'PIP upgraded'
 
+##PIP Packages
 print_status "${YELLOW}Installing PIP requirements${NC}"
-sudo -H pip install -r $gitdir/requirements.txt &>> $logfile
+sudo -H pip install jinja2 pymongo pymysql bottle pefile django chardet pygal m2crypto clamd django-ratelimit pycrypto weasyprint rarfile jsbeautifier python-whois bs4 &>> $logfile
+pip install cybox==2.1.0.9 &>> $logfile
+pip install maec==4.1.0.11 &>> $logfile
 error_check 'PIP requirements installation'
+
+##Setup Elasticsearch
+print_status "${YELLOW}Setting up Elasticsearch${NC}"
+update-rc.d elasticsearch defaults 95 10 &>> $logfile
+/etc/init.d/elasticsearch start &>> $logfile
 
 ##Add user to vbox and enable mongodb
 print_status "${YELLOW}Setting up Mongodb${NC}"
