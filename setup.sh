@@ -137,10 +137,10 @@ print_status "${YELLOW}Performing apt-get update and upgrade (May take a while i
 apt-get update &>> $logfile && apt-get -y upgrade &>> $logfile
 error_check 'Updated system'
 
-
+apt-get install oracle-java8-installer
 print_status "${YELLOW}Installing:${NC} autoconf automake bison checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool flex geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libhtp1 libjpeg-dev libjansson-dev libmagic1 libmagic-dev libre2-dev libssl-dev libtool libvirt-dev mongodb mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara suricata ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara .."
 
-declare -a packages=(oracle-java8-installer elasticsearch mongodb python python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-libvirt python-bottle python-pefile python-chardet swig libssl-dev clamav-daemon python-geoip geoip-database mono-utils wkhtmltopdf xvfb xfonts-100dpi tcpdump libcap2-bin virtualbox suricata p7zip-full unzip);
+declare -a packages=(python-pip oracle-java8-installer elasticsearch mongodb python python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-libvirt python-bottle python-pefile python-chardet swig libssl-dev clamav-daemon python-geoip geoip-database mono-utils wkhtmltopdf xvfb xfonts-100dpi tcpdump libcap2-bin virtualbox suricata p7zip-full unzip);
 install_packages ${packages[@]}
  
 print_status "${YELLOW}Upgrading PIP${NC}"
