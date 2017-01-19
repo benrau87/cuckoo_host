@@ -115,10 +115,10 @@ export DEBIAN_FRONTEND=noninteractive
 
 echo
 print_status "${YELLOW}Adding Repositories...Please Wait${NC}"
-#Mongodb
-#apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 &>> $logfile
-#echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list &>> $logfile
-#error_check 'Mongodb added'
+Mongodb
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 &>> $logfile
+echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list &>> $logfile
+error_check 'Mongodb added'
 
 ##Elasticsearch
 add-apt-repository ppa:webupd8team/java -y &>> $logfile
@@ -165,7 +165,7 @@ apt-get install oracle-java8-installer -y &>> $logfile
 error_check 'Java Installed'
 
 ##Apt packages
-print_status "${YELLOW}Installing:${NC} autoconf automake bison checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool flex geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libhtp1 libjpeg-dev libjansson-dev libmagic1 libmagic-dev libre2-dev libssl-dev libtool libvirt-dev mongodb mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara suricata ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara .."
+print_status "${YELLOW}Installing:${NC} autoconf automake bison checkinstall clamav clamav-daemon clamav-daemon clamav-freshclam curl exiftool flex geoip-database libarchive-dev libboost-all-dev libcap2-bin libconfig-dev libfuzzy-dev libgeoip-dev libhtp1 libjpeg-dev libjansson-dev libmagic1 libmagic-dev libre2-dev libssl-dev libtool libvirt-dev mongodb-org mono-utils openjdk-8-jre-headless p7zip-full python python-bottle python-bson python-chardet python-dev python-dpkt python-geoip python-jinja2 python-libvirt python-m2crypto python-magic python-pefile python-pip python-pymongo python-yara suricata ssdeep swig tcpdump unzip upx-ucl uthash-dev virtualbox wget wkhtmltopdf xfonts-100dpi xvfb yara .."
 
 declare -a packages=(autoconf autogen automake bison libfuzzy-dev libmagic-dev libconfig-dev libjansson-dev shtool python-pip oracle-java8-installer elasticsearch mongodb python python-sqlalchemy python-bson python-dpkt python-jinja2 python-magic python-pymongo python-libvirt python-bottle python-pefile python-chardet swig libssl-dev clamav-daemon python-geoip geoip-database mono-utils wkhtmltopdf xvfb xfonts-100dpi tcpdump libtool libcap2-bin virtualbox suricata p7zip-full unzip);
 install_packages ${packages[@]}
