@@ -19,6 +19,9 @@ echo
 apt-get -qq install nginx apache2-utils -y
 usermod -a -G cuckoo $user
 
+##Copy over service conf
+cp nginx.service /lib/systemd/system/
+
 ##Create and secure keys
 mkdir /etc/ssl/cuckoo/
 cd /etc/ssl/cuckoo/
