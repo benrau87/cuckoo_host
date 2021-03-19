@@ -23,7 +23,7 @@ idna==2.0
 ipaddress==1.0.14
 itsdangerous==0.24
 jdcal==1.3
-Jinja2==2.8
+Jinja2==2.11.3
 jsbeautifier==1.5.10
 libvirt-python==2.4.0
 lxml
