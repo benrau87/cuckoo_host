@@ -57,7 +57,7 @@ SQLAlchemy==1.0.8
 tlslite-ng==0.6.0a3
 ujson==1.35
 unity-lens-photos==1.0
-urllib3==1.19.1
+urllib3==1.26.5
 vboxapi==1.0
 wakeonlan==0.2.2
 Werkzeug==0.10.4
